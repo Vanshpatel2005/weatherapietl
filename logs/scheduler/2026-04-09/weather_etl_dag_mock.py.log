@@ -1,0 +1,196 @@
+[2026-04-09T11:10:06.788+0000] {processor.py:161} INFO - Started process (PID=292) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:10:06.790+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:10:06.795+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:06.794+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:10:06.895+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:06.894+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:10:06.937+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:10:07.242+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:07.241+0000] {override.py:1858} INFO - Created Permission View: can delete on DAG:weather_etl_pipeline_mock
+[2026-04-09T11:10:07.262+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:07.261+0000] {override.py:1858} INFO - Created Permission View: can edit on DAG:weather_etl_pipeline_mock
+[2026-04-09T11:10:07.272+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:07.271+0000] {override.py:1858} INFO - Created Permission View: can read on DAG:weather_etl_pipeline_mock
+[2026-04-09T11:10:07.273+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:07.272+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:10:07.294+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:07.294+0000] {dag.py:3111} INFO - Creating ORM DAG for weather_etl_pipeline_mock
+[2026-04-09T11:10:07.322+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:07.322+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-08 02:00:00+00:00, run_after=2026-04-09 02:00:00+00:00
+[2026-04-09T11:10:07.363+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.588 seconds
+[2026-04-09T11:10:37.495+0000] {processor.py:161} INFO - Started process (PID=307) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:10:37.497+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:10:37.503+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:37.502+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:10:37.630+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:37.630+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:10:37.697+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:10:37.790+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:37.788+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:10:37.898+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:10:37.897+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-08 02:00:00+00:00, run_after=2026-04-09 02:00:00+00:00
+[2026-04-09T11:10:37.974+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.491 seconds
+[2026-04-09T11:11:08.720+0000] {processor.py:161} INFO - Started process (PID=342) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:11:08.722+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:11:08.725+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:11:08.724+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:11:08.865+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:11:08.864+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:11:08.969+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:11:09.062+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:11:09.061+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:11:09.108+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:11:09.107+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:11:09.165+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.454 seconds
+[2026-04-09T11:11:39.412+0000] {processor.py:161} INFO - Started process (PID=361) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:11:39.414+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:11:39.419+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:11:39.418+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:11:39.525+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:11:39.525+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:11:39.575+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:11:39.622+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:11:39.621+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:11:39.651+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:11:39.651+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:11:39.683+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.282 seconds
+[2026-04-09T11:12:09.830+0000] {processor.py:161} INFO - Started process (PID=376) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:12:09.832+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:12:09.835+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:12:09.835+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:12:09.964+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:12:09.964+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:12:10.034+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:12:10.115+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:12:10.115+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:12:10.152+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:12:10.152+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:12:10.189+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.371 seconds
+[2026-04-09T11:12:40.342+0000] {processor.py:161} INFO - Started process (PID=391) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:12:40.344+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:12:40.352+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:12:40.347+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:12:40.510+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:12:40.510+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:12:40.563+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:12:40.615+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:12:40.615+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:12:40.669+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:12:40.669+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:12:40.714+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.387 seconds
+[2026-04-09T11:13:10.894+0000] {processor.py:161} INFO - Started process (PID=406) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:13:10.900+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:13:10.905+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:13:10.904+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:13:11.243+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:13:11.243+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:13:11.294+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:13:11.368+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:13:11.368+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:13:11.418+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:13:11.418+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:13:11.451+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.568 seconds
+[2026-04-09T11:13:42.208+0000] {processor.py:161} INFO - Started process (PID=421) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:13:42.211+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:13:42.214+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:13:42.213+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:13:42.334+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:13:42.333+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:13:42.396+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:13:42.449+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:13:42.448+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:13:42.482+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:13:42.482+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:13:42.518+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.318 seconds
+[2026-04-09T11:14:13.212+0000] {processor.py:161} INFO - Started process (PID=436) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:14:13.215+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:14:13.221+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:14:13.220+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:14:13.410+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:14:13.409+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:14:13.511+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:14:13.567+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:14:13.567+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:14:13.612+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:14:13.612+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:14:13.656+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.458 seconds
+[2026-04-09T11:14:43.974+0000] {processor.py:161} INFO - Started process (PID=451) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:14:43.976+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:14:43.980+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:14:43.979+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:14:44.130+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:14:44.129+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:14:44.198+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:14:44.252+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:14:44.252+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:14:44.288+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:14:44.287+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:14:44.323+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.359 seconds
+[2026-04-09T11:15:15.195+0000] {processor.py:161} INFO - Started process (PID=466) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:15:15.197+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:15:15.200+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:15:15.199+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:15:15.327+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:15:15.326+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:15:15.390+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:15:15.440+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:15:15.439+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:15:15.472+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:15:15.472+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:15:15.508+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.321 seconds
+[2026-04-09T11:15:46.269+0000] {processor.py:161} INFO - Started process (PID=481) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:15:46.272+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:15:46.276+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:15:46.275+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:15:46.401+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:15:46.400+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:15:46.469+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:15:46.521+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:15:46.520+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:15:46.556+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:15:46.556+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:15:46.592+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.331 seconds
+[2026-04-09T11:16:17.195+0000] {processor.py:161} INFO - Started process (PID=496) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:16:17.203+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:16:17.208+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:16:17.207+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:16:17.340+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:16:17.339+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:16:17.398+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:16:17.448+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:16:17.448+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:16:17.481+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:16:17.481+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:16:17.606+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.420 seconds
+[2026-04-09T11:16:47.867+0000] {processor.py:161} INFO - Started process (PID=511) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:16:47.869+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:16:47.872+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:16:47.871+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:16:48.070+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:16:48.070+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:16:48.200+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:16:48.301+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:16:48.300+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:16:48.345+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:16:48.345+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:16:48.380+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.525 seconds
+[2026-04-09T11:17:18.842+0000] {processor.py:161} INFO - Started process (PID=526) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:17:18.845+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:17:18.850+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:17:18.850+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:17:19.065+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:17:19.065+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:17:19.174+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:17:19.233+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:17:19.233+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:17:19.269+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:17:19.269+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:17:19.309+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.481 seconds
+[2026-04-09T11:17:49.447+0000] {processor.py:161} INFO - Started process (PID=541) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:17:49.459+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:17:49.546+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:17:49.541+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:17:49.702+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:17:49.701+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:17:49.750+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:17:49.798+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:17:49.798+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:17:49.829+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:17:49.828+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:17:49.859+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.430 seconds
+[2026-04-09T11:18:20.736+0000] {processor.py:161} INFO - Started process (PID=556) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:18:20.740+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:18:20.744+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:18:20.743+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:18:20.852+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:18:20.851+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:18:20.911+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:18:20.985+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:18:20.985+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:18:21.043+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:18:21.042+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:18:21.090+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.367 seconds
+[2026-04-09T11:18:51.206+0000] {processor.py:161} INFO - Started process (PID=571) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:18:51.208+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:18:51.211+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:18:51.210+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:18:51.308+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:18:51.307+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:18:51.370+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:18:51.465+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:18:51.464+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:18:51.633+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:18:51.632+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:18:51.867+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.670 seconds
+[2026-04-09T11:19:22.115+0000] {processor.py:161} INFO - Started process (PID=586) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:19:22.117+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:19:22.120+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:19:22.119+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:19:22.210+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:19:22.210+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:19:22.260+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:19:22.313+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:19:22.313+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:19:22.356+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:19:22.356+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:19:22.394+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.288 seconds
+[2026-04-09T11:19:52.516+0000] {processor.py:161} INFO - Started process (PID=601) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:19:52.519+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:19:52.522+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:19:52.522+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:19:52.657+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:19:52.656+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:19:52.733+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:19:52.785+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:19:52.785+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:19:52.817+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:19:52.816+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:19:52.853+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.346 seconds
+[2026-04-09T11:20:23.051+0000] {processor.py:161} INFO - Started process (PID=616) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:20:23.054+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:20:23.057+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:20:23.056+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:20:23.192+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:20:23.191+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:20:23.267+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:20:23.318+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:20:23.318+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:20:23.352+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:20:23.352+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:20:23.388+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.347 seconds
+[2026-04-09T11:20:53.744+0000] {processor.py:161} INFO - Started process (PID=631) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:20:53.746+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:20:53.751+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:20:53.750+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:20:53.876+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:20:53.876+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:20:53.992+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:20:54.144+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:20:54.143+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:20:54.224+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:20:54.223+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:20:54.283+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.556 seconds
+[2026-04-09T11:21:24.489+0000] {processor.py:161} INFO - Started process (PID=646) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:21:24.491+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:21:24.495+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:21:24.494+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:21:24.606+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:21:24.605+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:21:24.667+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:21:24.734+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:21:24.733+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:21:24.778+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:21:24.778+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:21:24.818+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.339 seconds
+[2026-04-09T11:21:55.525+0000] {processor.py:161} INFO - Started process (PID=661) to work on /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:21:55.527+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/weather_etl_dag_mock.py for tasks to queue
+[2026-04-09T11:21:55.530+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:21:55.530+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:21:55.626+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:21:55.625+0000] {config.py:59} INFO - Configuration validation passed
+[2026-04-09T11:21:55.684+0000] {processor.py:840} INFO - DAG(s) 'weather_etl_pipeline_mock' retrieved from /opt/airflow/dags/weather_etl_dag_mock.py
+[2026-04-09T11:21:55.821+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:21:55.820+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-09T11:21:55.925+0000] {logging_mixin.py:188} INFO - [2026-04-09T11:21:55.924+0000] {dag.py:3947} INFO - Setting next_dagrun for weather_etl_pipeline_mock to 2026-04-09 02:00:00+00:00, run_after=2026-04-10 02:00:00+00:00
+[2026-04-09T11:21:55.982+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/weather_etl_dag_mock.py took 0.467 seconds

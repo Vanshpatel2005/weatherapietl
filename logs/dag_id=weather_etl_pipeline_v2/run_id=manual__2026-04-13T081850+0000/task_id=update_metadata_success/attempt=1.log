@@ -1,0 +1,33 @@
+[2026-04-13T08:19:02.099+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-13T08:19:02.177+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.update_metadata_success manual__2026-04-13T08:18:50+00:00 [queued]>
+[2026-04-13T08:19:02.199+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.update_metadata_success manual__2026-04-13T08:18:50+00:00 [queued]>
+[2026-04-13T08:19:02.202+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 4
+[2026-04-13T08:19:02.229+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): update_metadata_success> on 2026-04-13 08:18:50+00:00
+[2026-04-13T08:19:02.242+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'update_metadata_success', 'manual__2026-04-13T08:18:50+00:00', '--job-id', '200', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmpyqmevsma']
+[2026-04-13T08:19:02.247+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=770) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-13T08:19:02.249+0000] {standard_task_runner.py:91} INFO - Job 200: Subtask update_metadata_success
+[2026-04-13T08:19:02.250+0000] {standard_task_runner.py:64} INFO - Started process 771 to run task
+[2026-04-13T08:19:02.366+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.update_metadata_success manual__2026-04-13T08:18:50+00:00 [running]> on host 0e50340581e5
+[2026-04-13T08:19:02.553+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='update_metadata_success' AIRFLOW_CTX_EXECUTION_DATE='2026-04-13T08:18:50+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-13T08:18:50+00:00'
+[2026-04-13T08:19:02.556+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-13T08:19:02.581+0000] {weather_etl_dag_v2.py:254} INFO - ============================================================
+[2026-04-13T08:19:02.583+0000] {weather_etl_dag_v2.py:255} INFO - TASK: UPDATE_METADATA_SUCCESS - Recording successful run
+[2026-04-13T08:19:02.586+0000] {weather_etl_dag_v2.py:256} INFO - ============================================================
+[2026-04-13T08:19:02.687+0000] {logging_mixin.py:188} WARNING - 2026-04-13 08:19:02 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+[2026-04-13T08:19:02.686+0000] {metadata_manager.py:38} INFO - Successfully connected to PostgreSQL database
+[2026-04-13T08:19:02.701+0000] {logging_mixin.py:188} WARNING - 2026-04-13 08:19:02 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+[2026-04-13T08:19:02.700+0000] {metadata_manager.py:92} INFO - Table 'pipeline_metadata' created or already exists
+[2026-04-13T08:19:02.708+0000] {logging_mixin.py:188} WARNING - 2026-04-13 08:19:02 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as SUCCESS: 7 processed, 88 inserted, 0 failed
+[2026-04-13T08:19:02.707+0000] {metadata_manager.py:241} INFO - Pipeline weather_etl_pipeline_v2 marked as SUCCESS: 7 processed, 88 inserted, 0 failed
+[2026-04-13T08:19:02.711+0000] {logging_mixin.py:188} WARNING - 2026-04-13 08:19:02 - scripts.metadata_manager - INFO - Database connection closed
+[2026-04-13T08:19:02.710+0000] {metadata_manager.py:53} INFO - Database connection closed
+[2026-04-13T08:19:02.714+0000] {weather_etl_dag_v2.py:278} INFO - ✓ Metadata updated: Pipeline marked as SUCCESS
+[2026-04-13T08:19:02.716+0000] {weather_etl_dag_v2.py:279} INFO -   - Records processed: 7
+[2026-04-13T08:19:02.718+0000] {weather_etl_dag_v2.py:280} INFO -   - Records inserted: 88
+[2026-04-13T08:19:02.720+0000] {weather_etl_dag_v2.py:281} INFO -   - Validation rate: 100.0%
+[2026-04-13T08:19:02.723+0000] {python.py:237} INFO - Done. Returned value was: True
+[2026-04-13T08:19:02.725+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-13T08:19:02.772+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=update_metadata_success, run_id=manual__2026-04-13T08:18:50+00:00, execution_date=20260413T081850, start_date=20260413T081902, end_date=20260413T081902
+[2026-04-13T08:19:02.833+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-13T08:19:02.871+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-13T08:19:02.876+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

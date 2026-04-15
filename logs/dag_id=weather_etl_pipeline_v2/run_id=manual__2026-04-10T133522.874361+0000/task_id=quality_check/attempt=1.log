@@ -1,0 +1,26 @@
+[2026-04-10T13:35:30.641+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-10T13:35:30.697+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.quality_check manual__2026-04-10T13:35:22.874361+00:00 [queued]>
+[2026-04-10T13:35:30.712+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.quality_check manual__2026-04-10T13:35:22.874361+00:00 [queued]>
+[2026-04-10T13:35:30.714+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-04-10T13:35:30.731+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): quality_check> on 2026-04-10 13:35:22.874361+00:00
+[2026-04-10T13:35:30.739+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'quality_check', 'manual__2026-04-10T13:35:22.874361+00:00', '--job-id', '64', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmpc8_gm3nt']
+[2026-04-10T13:35:30.742+0000] {standard_task_runner.py:91} INFO - Job 64: Subtask quality_check
+[2026-04-10T13:35:30.745+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=309) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-10T13:35:30.747+0000] {standard_task_runner.py:64} INFO - Started process 310 to run task
+[2026-04-10T13:35:30.823+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.quality_check manual__2026-04-10T13:35:22.874361+00:00 [running]> on host e69da4fb5dc4
+[2026-04-10T13:35:30.933+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='quality_check' AIRFLOW_CTX_EXECUTION_DATE='2026-04-10T13:35:22.874361+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-10T13:35:22.874361+00:00'
+[2026-04-10T13:35:30.934+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-10T13:35:30.951+0000] {weather_etl_dag_v2.py:158} INFO - ============================================================
+[2026-04-10T13:35:30.953+0000] {weather_etl_dag_v2.py:159} INFO - TASK: QUALITY_CHECK - Validating data quality
+[2026-04-10T13:35:30.954+0000] {weather_etl_dag_v2.py:160} INFO - ============================================================
+[2026-04-10T13:35:30.970+0000] {logging_mixin.py:188} WARNING - 2026-04-10 13:35:30 - scripts.validate - INFO - Starting data quality validation for 20 records
+[2026-04-10T13:35:30.969+0000] {validate.py:201} INFO - Starting data quality validation for 20 records
+[2026-04-10T13:35:30.972+0000] {logging_mixin.py:188} WARNING - 2026-04-10 13:35:30 - scripts.validate - INFO - Validation complete: 20 valid, 0 invalid (100.0% pass rate)
+[2026-04-10T13:35:30.971+0000] {validate.py:228} INFO - Validation complete: 20 valid, 0 invalid (100.0% pass rate)
+[2026-04-10T13:35:30.973+0000] {weather_etl_dag_v2.py:207} INFO - ✓ Quality check complete: 100.0% pass rate
+[2026-04-10T13:35:30.991+0000] {python.py:237} INFO - Done. Returned value was: 100.0
+[2026-04-10T13:35:30.992+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-10T13:35:31.024+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=quality_check, run_id=manual__2026-04-10T13:35:22.874361+00:00, execution_date=20260410T133522, start_date=20260410T133530, end_date=20260410T133531
+[2026-04-10T13:35:31.082+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-10T13:35:31.121+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-10T13:35:31.127+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

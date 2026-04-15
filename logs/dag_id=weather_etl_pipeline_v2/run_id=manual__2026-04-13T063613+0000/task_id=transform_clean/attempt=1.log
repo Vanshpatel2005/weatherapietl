@@ -1,0 +1,202 @@
+[2026-04-13T06:36:21.349+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-13T06:36:21.417+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-13T06:36:13+00:00 [queued]>
+[2026-04-13T06:36:21.445+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-13T06:36:13+00:00 [queued]>
+[2026-04-13T06:36:21.450+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 4
+[2026-04-13T06:36:21.482+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform_clean> on 2026-04-13 06:36:13+00:00
+[2026-04-13T06:36:21.501+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'transform_clean', 'manual__2026-04-13T06:36:13+00:00', '--job-id', '158', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmpv5nt291q']
+[2026-04-13T06:36:21.512+0000] {standard_task_runner.py:91} INFO - Job 158: Subtask transform_clean
+[2026-04-13T06:36:21.521+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=194) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-13T06:36:21.523+0000] {standard_task_runner.py:64} INFO - Started process 201 to run task
+[2026-04-13T06:36:21.654+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-13T06:36:13+00:00 [running]> on host 5aae7c9eda2a
+[2026-04-13T06:36:21.821+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='transform_clean' AIRFLOW_CTX_EXECUTION_DATE='2026-04-13T06:36:13+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-13T06:36:13+00:00'
+[2026-04-13T06:36:21.825+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-13T06:36:21.868+0000] {weather_etl_dag_v2.py:123} INFO - ============================================================
+[2026-04-13T06:36:21.872+0000] {weather_etl_dag_v2.py:124} INFO - TASK: TRANSFORM_CLEAN - Transform and load clean data
+[2026-04-13T06:36:21.874+0000] {weather_etl_dag_v2.py:125} INFO - ============================================================
+[2026-04-13T06:36:21.906+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+[2026-04-13T06:36:21.905+0000] {load_raw.py:38} INFO - Successfully connected to PostgreSQL database
+[2026-04-13T06:36:21.921+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_raw - INFO - Retrieved 54 unprocessed raw records
+[2026-04-13T06:36:21.920+0000] {load_raw.py:206} INFO - Retrieved 54 unprocessed raw records
+[2026-04-13T06:36:21.926+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_raw - INFO - Database connection closed
+[2026-04-13T06:36:21.923+0000] {load_raw.py:53} INFO - Database connection closed
+[2026-04-13T06:36:21.929+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - INFO - Starting transformation and load for 54 raw records
+[2026-04-13T06:36:21.928+0000] {load_clean.py:214} INFO - Starting transformation and load for 54 raw records
+[2026-04-13T06:36:21.939+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - INFO - Successfully connected to PostgreSQL database
+[2026-04-13T06:36:21.938+0000] {load_clean.py:41} INFO - Successfully connected to PostgreSQL database
+[2026-04-13T06:36:21.947+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - INFO - Table 'weather_clean' created or already exists
+[2026-04-13T06:36:21.946+0000] {load_clean.py:91} INFO - Table 'weather_clean' created or already exists
+[2026-04-13T06:36:21.960+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: duplicate key value violates unique constraint "weather_clean_pkey"
+DETAIL:  Key (city_name, recorded_at)=(Ahmedabad, 2026-04-11 11:00:02) already exists.
+[2026-04-13T06:36:21.959+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: duplicate key value violates unique constraint "weather_clean_pkey"
+DETAIL:  Key (city_name, recorded_at)=(Ahmedabad, 2026-04-11 11:00:02) already exists.
+
+[2026-04-13T06:36:21.966+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.965+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:21.968+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.967+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:21.972+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.971+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:21.975+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.974+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:21.980+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.979+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:21.984+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.983+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:21.988+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.988+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:21.993+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.992+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:21.997+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:21 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:21.996+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.001+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.001+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.005+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.004+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.008+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.007+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.011+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.011+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.014+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.013+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.016+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.016+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.020+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.019+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.024+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.023+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.029+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.028+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.034+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.033+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.038+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.036+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.041+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.041+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.043+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.043+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.046+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.045+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.048+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.047+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.050+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.049+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.051+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.051+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.055+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.054+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.057+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.057+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.061+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.060+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.064+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.063+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.067+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.066+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.070+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.069+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.073+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.072+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.076+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.075+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.078+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.078+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.082+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.081+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.085+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.084+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.088+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.087+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.091+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.090+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.095+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.093+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.097+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.097+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.099+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.099+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.103+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.102+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.107+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.106+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.111+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.110+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.116+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.115+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.121+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.119+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.125+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.124+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.129+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.128+0000] {load_clean.py:197} ERROR - Error inserting clean record for Ahmedabad: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.132+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.132+0000] {load_clean.py:197} ERROR - Error inserting clean record for Mumbai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.137+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.136+0000] {load_clean.py:197} ERROR - Error inserting clean record for Delhi: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.141+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.140+0000] {load_clean.py:197} ERROR - Error inserting clean record for Bengaluru: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.145+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+[2026-04-13T06:36:22.144+0000] {load_clean.py:197} ERROR - Error inserting clean record for Chennai: current transaction is aborted, commands ignored until end of transaction block
+
+[2026-04-13T06:36:22.150+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - INFO - Clean data load complete: 54 transformed, 54 validated, 0 loaded, 54 failed
+[2026-04-13T06:36:22.148+0000] {load_clean.py:269} INFO - Clean data load complete: 54 transformed, 54 validated, 0 loaded, 54 failed
+[2026-04-13T06:36:22.156+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:36:22 - scripts.load_clean - INFO - Database connection closed
+[2026-04-13T06:36:22.152+0000] {load_clean.py:56} INFO - Database connection closed
+[2026-04-13T06:36:22.158+0000] {weather_etl_dag_v2.py:141} INFO - ✓ Transform and load complete: 0 loaded, 54 failed
+[2026-04-13T06:36:22.198+0000] {python.py:237} INFO - Done. Returned value was: 0
+[2026-04-13T06:36:22.200+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-13T06:36:22.259+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=transform_clean, run_id=manual__2026-04-13T06:36:13+00:00, execution_date=20260413T063613, start_date=20260413T063621, end_date=20260413T063622
+[2026-04-13T06:36:22.305+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-13T06:36:22.360+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-13T06:36:22.365+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

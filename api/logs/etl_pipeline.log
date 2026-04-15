@@ -1,0 +1,126 @@
+2026-04-10 18:36:56 - __main__ - INFO - Starting FastAPI server on port 8000
+2026-04-10 18:39:34 - __main__ - ERROR - Error fetching pipeline status: relation "pipeline_metadata" does not exist
+LINE 6:         FROM pipeline_metadata
+                     ^
+
+2026-04-10 18:39:34 - __main__ - ERROR - Error fetching data quality: relation "weather_clean" does not exist
+LINE 10:         FROM weather_clean;
+                      ^
+
+2026-04-10 18:39:34 - __main__ - ERROR - Error fetching historical trends: relation "weather_clean" does not exist
+LINE 7:         FROM weather_clean
+                     ^
+
+2026-04-10 18:39:34 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+
+2026-04-10 18:41:57 - __main__ - INFO - Starting FastAPI server on port 8000
+2026-04-10 18:43:59 - __main__ - ERROR - Error fetching pipeline status: relation "pipeline_metadata" does not exist
+LINE 6:         FROM pipeline_metadata
+                     ^
+
+2026-04-10 18:43:59 - __main__ - ERROR - Error fetching data quality: relation "weather_clean" does not exist
+LINE 10:         FROM weather_clean;
+                      ^
+
+2026-04-10 18:43:59 - __main__ - ERROR - Error fetching historical trends: relation "weather_clean" does not exist
+LINE 7:         FROM weather_clean
+                     ^
+
+2026-04-10 18:43:59 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+
+2026-04-10 18:45:40 - __main__ - INFO - Starting FastAPI server on port 8000
+2026-04-10 18:45:47 - __main__ - ERROR - Error fetching pipeline status: relation "pipeline_metadata" does not exist
+LINE 6:         FROM pipeline_metadata
+                     ^
+
+2026-04-10 18:45:47 - __main__ - ERROR - Error fetching data quality: relation "weather_clean" does not exist
+LINE 10:         FROM weather_clean;
+                      ^
+
+2026-04-10 18:45:47 - __main__ - ERROR - Error fetching historical trends: relation "weather_clean" does not exist
+LINE 7:         FROM weather_clean
+                     ^
+
+2026-04-10 18:45:47 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+
+2026-04-10 18:46:27 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+
+2026-04-10 18:46:42 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+
+2026-04-10 18:48:04 - __main__ - INFO - Starting FastAPI server on port 8000
+2026-04-10 18:48:20 - __main__ - ERROR - Error fetching pipeline status: relation "pipeline_metadata" does not exist
+LINE 6:         FROM pipeline_metadata
+                     ^
+
+2026-04-10 18:48:20 - __main__ - ERROR - Error fetching data quality: relation "weather_clean" does not exist
+LINE 10:         FROM weather_clean;
+                      ^
+
+2026-04-10 18:48:20 - __main__ - ERROR - Error fetching historical trends: relation "weather_clean" does not exist
+LINE 7:         FROM weather_clean
+                     ^
+
+2026-04-10 18:48:20 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+
+2026-04-10 18:49:47 - __main__ - INFO - Starting FastAPI server on port 8000
+2026-04-10 18:50:00 - __main__ - ERROR - Error fetching pipeline status: relation "pipeline_metadata" does not exist
+LINE 6:         FROM pipeline_metadata
+                     ^
+
+2026-04-10 18:50:00 - __main__ - ERROR - Error fetching data quality: relation "weather_clean" does not exist
+LINE 10:         FROM weather_clean;
+                      ^
+
+2026-04-10 18:50:00 - __main__ - ERROR - Error fetching historical trends: relation "weather_clean" does not exist
+LINE 7:         FROM weather_clean
+                     ^
+
+2026-04-10 18:50:00 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+
+2026-04-10 18:53:44 - __main__ - INFO - Starting FastAPI server on port 8000
+2026-04-10 18:54:03 - __main__ - ERROR - Error fetching pipeline status: relation "pipeline_metadata" does not exist
+LINE 6:         FROM pipeline_metadata
+                     ^
+
+2026-04-10 18:54:03 - __main__ - ERROR - Error fetching data quality: relation "weather_clean" does not exist
+LINE 10:         FROM weather_clean;
+                      ^
+
+2026-04-10 18:54:03 - __main__ - ERROR - Error fetching historical trends: relation "weather_clean" does not exist
+LINE 7:         FROM weather_clean
+                     ^
+
+2026-04-10 18:54:03 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+
+2026-04-10 18:59:03 - __main__ - ERROR - Error fetching pipeline status: relation "pipeline_metadata" does not exist
+LINE 6:         FROM pipeline_metadata
+                     ^
+
+2026-04-10 18:59:03 - __main__ - ERROR - Error fetching data quality: relation "weather_clean" does not exist
+LINE 10:         FROM weather_clean;
+                      ^
+
+2026-04-10 18:59:03 - __main__ - ERROR - Error fetching historical trends: relation "weather_clean" does not exist
+LINE 7:         FROM weather_clean
+                     ^
+
+2026-04-10 18:59:04 - __main__ - ERROR - Error fetching latest data: relation "weather_clean" does not exist
+LINE 8:         FROM weather_clean
+                     ^
+

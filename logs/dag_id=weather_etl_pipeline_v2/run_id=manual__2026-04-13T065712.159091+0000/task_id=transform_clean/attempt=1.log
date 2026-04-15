@@ -1,0 +1,188 @@
+[2026-04-13T06:57:21.691+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-13T06:57:21.772+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-13T06:57:12.159091+00:00 [queued]>
+[2026-04-13T06:57:21.797+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-13T06:57:12.159091+00:00 [queued]>
+[2026-04-13T06:57:21.799+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 4
+[2026-04-13T06:57:21.830+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform_clean> on 2026-04-13 06:57:12.159091+00:00
+[2026-04-13T06:57:21.846+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'transform_clean', 'manual__2026-04-13T06:57:12.159091+00:00', '--job-id', '184', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmpmr59502d']
+[2026-04-13T06:57:21.854+0000] {standard_task_runner.py:91} INFO - Job 184: Subtask transform_clean
+[2026-04-13T06:57:21.854+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=458) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-13T06:57:21.857+0000] {standard_task_runner.py:64} INFO - Started process 459 to run task
+[2026-04-13T06:57:21.968+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-13T06:57:12.159091+00:00 [running]> on host 5aae7c9eda2a
+[2026-04-13T06:57:22.192+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='transform_clean' AIRFLOW_CTX_EXECUTION_DATE='2026-04-13T06:57:12.159091+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-13T06:57:12.159091+00:00'
+[2026-04-13T06:57:22.194+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-13T06:57:22.214+0000] {weather_etl_dag_v2.py:148} INFO - ============================================================
+[2026-04-13T06:57:22.217+0000] {weather_etl_dag_v2.py:149} INFO - TASK: TRANSFORM_CLEAN - Transform and load clean data
+[2026-04-13T06:57:22.219+0000] {weather_etl_dag_v2.py:150} INFO - ============================================================
+[2026-04-13T06:57:22.258+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+[2026-04-13T06:57:22.256+0000] {load_raw.py:38} INFO - Successfully connected to PostgreSQL database
+[2026-04-13T06:57:22.277+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_raw - INFO - Retrieved 74 unprocessed raw records
+[2026-04-13T06:57:22.275+0000] {load_raw.py:206} INFO - Retrieved 74 unprocessed raw records
+[2026-04-13T06:57:22.281+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_raw - INFO - Database connection closed
+[2026-04-13T06:57:22.280+0000] {load_raw.py:53} INFO - Database connection closed
+[2026-04-13T06:57:22.286+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Starting transformation and load for 74 raw records
+[2026-04-13T06:57:22.284+0000] {load_clean.py:169} INFO - Starting transformation and load for 74 raw records
+[2026-04-13T06:57:22.304+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Successfully connected to PostgreSQL database
+[2026-04-13T06:57:22.303+0000] {load_clean.py:41} INFO - Successfully connected to PostgreSQL database
+[2026-04-13T06:57:22.311+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Table 'weather_clean' created or already exists
+[2026-04-13T06:57:22.309+0000] {load_clean.py:91} INFO - Table 'weather_clean' created or already exists
+[2026-04-13T06:57:22.318+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.317+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.324+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.323+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.329+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.327+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.334+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.333+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.340+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.339+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.347+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.345+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.353+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.352+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.359+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.358+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.365+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.364+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.372+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.371+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.377+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.376+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.382+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.381+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.388+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.387+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.394+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.393+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.401+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.399+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.408+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.406+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.415+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.414+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.422+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.421+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.428+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.427+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.436+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.434+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.444+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.442+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.452+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.450+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.457+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.456+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.463+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.462+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.469+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.468+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.477+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.476+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.485+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.484+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.492+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.491+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.498+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.497+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.504+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.503+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.511+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.510+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.517+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.515+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.520+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.519+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.526+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.525+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.531+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.530+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.536+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.535+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.541+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.540+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.546+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.545+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.549+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.548+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.555+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.554+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.559+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.558+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.563+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.562+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.567+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.566+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.574+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.573+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.579+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.578+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.583+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.583+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.588+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.588+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.592+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.591+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.596+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.595+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.602+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.601+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.605+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.604+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.609+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.608+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.611+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.611+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.615+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.614+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.619+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.618+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.623+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.622+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.627+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.626+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.632+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.630+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.638+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.637+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.644+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.643+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.649+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.648+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.652+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.651+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.656+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.655+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.660+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.659+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.665+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.664+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.671+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.670+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.675+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Islamabad (deleted old records first)
+[2026-04-13T06:57:22.674+0000] {load_clean.py:149} INFO - Inserted new record for Islamabad (deleted old records first)
+[2026-04-13T06:57:22.681+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.680+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.688+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.686+0000] {load_clean.py:149} INFO - Inserted new record for Ahmedabad (deleted old records first)
+[2026-04-13T06:57:22.695+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.694+0000] {load_clean.py:149} INFO - Inserted new record for Bengaluru (deleted old records first)
+[2026-04-13T06:57:22.700+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.699+0000] {load_clean.py:149} INFO - Inserted new record for Chennai (deleted old records first)
+[2026-04-13T06:57:22.705+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.704+0000] {load_clean.py:149} INFO - Inserted new record for Delhi (deleted old records first)
+[2026-04-13T06:57:22.710+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Islamabad (deleted old records first)
+[2026-04-13T06:57:22.709+0000] {load_clean.py:149} INFO - Inserted new record for Islamabad (deleted old records first)
+[2026-04-13T06:57:22.715+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.714+0000] {load_clean.py:149} INFO - Inserted new record for Mumbai (deleted old records first)
+[2026-04-13T06:57:22.730+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Marked 74 raw records as processed
+[2026-04-13T06:57:22.729+0000] {load_clean.py:252} INFO - Marked 74 raw records as processed
+[2026-04-13T06:57:22.734+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Clean data load complete: 74 transformed, 74 validated, 74 loaded, 0 failed
+[2026-04-13T06:57:22.733+0000] {load_clean.py:224} INFO - Clean data load complete: 74 transformed, 74 validated, 74 loaded, 0 failed
+[2026-04-13T06:57:22.737+0000] {logging_mixin.py:188} WARNING - 2026-04-13 06:57:22 - scripts.load_clean - INFO - Database connection closed
+[2026-04-13T06:57:22.736+0000] {load_clean.py:56} INFO - Database connection closed
+[2026-04-13T06:57:22.739+0000] {weather_etl_dag_v2.py:166} INFO - ✓ Transform and load complete: 74 loaded, 0 failed
+[2026-04-13T06:57:22.767+0000] {python.py:237} INFO - Done. Returned value was: 74
+[2026-04-13T06:57:22.769+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-13T06:57:22.816+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=transform_clean, run_id=manual__2026-04-13T06:57:12.159091+00:00, execution_date=20260413T065712, start_date=20260413T065721, end_date=20260413T065722
+[2026-04-13T06:57:22.881+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-13T06:57:22.939+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-13T06:57:22.945+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

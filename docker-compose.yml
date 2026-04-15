@@ -1,0 +1,131 @@
+version: '3.8'
+
+networks:
+  weather-network:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vanshdb
+      POSTGRES_DB: weather_warehouse
+      POSTGRES_MULTIPLE_DATABASES: airflow,weather_warehouse
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - weather-network
+    command:
+      - postgres
+      - -c
+      - listen_addresses=*
+      - -c
+      - max_connections=200
+
+  airflow-webserver:
+    image: apache/airflow:2.9.3-python3.12
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:vanshdb@postgres:5432/airflow
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      AIRFLOW__API__AUTH_BACKEND: airflow.api.auth.backend.basic_auth
+      _AIRFLOW_WWW_USER_USERNAME: airflow
+      _AIRFLOW_WWW_USER_PASSWORD: airflow
+      _AIRFLOW_WWW_USER_CREATE_ADMIN: 'true'
+      OPENWEATHER_API_KEY: 71ea710fd7b13fd6e8f5c5a6253f6f46
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: weather_warehouse
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vanshdb
+      CITIES: Ahmedabad,Mumbai,Delhi,Bangalore,Chennai
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./config:/opt/airflow/config
+      - ./logs:/opt/airflow/logs
+    ports:
+      - "8080:8080"
+    command: airflow webserver
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - weather-network
+
+  airflow-scheduler:
+    image: apache/airflow:2.9.3-python3.12
+    depends_on:
+      - postgres
+      - airflow-webserver
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:vanshdb@postgres:5432/airflow
+      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      OPENWEATHER_API_KEY: 71ea710fd7b13fd6e8f5c5a6253f6f46
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: weather_warehouse
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vanshdb
+      CITIES: Ahmedabad,Mumbai,Delhi,Bangalore,Chennai
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+      - ./config:/opt/airflow/config
+      - ./logs:/opt/airflow/logs
+    command: airflow scheduler
+    networks:
+      - weather-network
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: weather_warehouse
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vanshdb
+      CITIES: Ahmedabad,Mumbai,Delhi,Bangalore,Chennai
+      OPENWEATHER_API_KEY: 71ea710fd7b13fd6e8f5c5a6253f6f46
+    volumes:
+      - ./api:/app/api
+      - ./config:/app/config
+      - ./scripts:/app/scripts
+    ports:
+      - "8000:8000"
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+    networks:
+      - weather-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    networks:
+      - weather-network
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
