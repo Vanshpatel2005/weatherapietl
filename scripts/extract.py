@@ -103,8 +103,9 @@ class WeatherExtractor:
             data = self.fetch_weather_data(city)
             
             if data:
-                # Add extraction timestamp
+                # Add extraction timestamp and requested city name to map to our DB
                 data['extraction_timestamp'] = datetime.now().isoformat()
+                data['requested_city_name'] = city
                 weather_data_list.append(data)
                 successful_cities += 1
             else:

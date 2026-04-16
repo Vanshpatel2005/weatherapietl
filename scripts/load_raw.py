@@ -53,72 +53,83 @@ class RawDataLoader:
         self.logger.info("Database connection closed")
     
     def create_raw_table_if_not_exists(self):
-        """Create weather_raw table if it doesn't exist."""
+        """Create weather_raw table if it doesn't exist (idempotent)."""
         create_table_query = """
         CREATE TABLE IF NOT EXISTS weather_raw (
-            id SERIAL PRIMARY KEY,
-            city_name VARCHAR(100) NOT NULL,
-            raw_data JSONB NOT NULL,
-            api_response_code INTEGER,
+            id                   SERIAL PRIMARY KEY,
+            city_name            VARCHAR(100) NOT NULL,
+            city_id              INTEGER REFERENCES cities(id) ON DELETE SET NULL,
+            raw_data             JSONB NOT NULL,
+            api_response_code    INTEGER,
             extraction_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            ingestion_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            city_id INTEGER REFERENCES cities(id),
-            UNIQUE(city_name)
+            ingestion_timestamp  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            processed            BOOLEAN DEFAULT FALSE,
+            -- Soft delete: NULL = active, timestamp = logically deleted
+            deleted_at           TIMESTAMP DEFAULT NULL,
+            UNIQUE(city_name, extraction_timestamp)
         );
-        
-        CREATE INDEX IF NOT EXISTS idx_raw_city_name ON weather_raw(city_name);
-        CREATE INDEX IF NOT EXISTS idx_raw_extraction_timestamp ON weather_raw(extraction_timestamp);
-        CREATE INDEX IF NOT EXISTS idx_raw_city_id ON weather_raw(city_id);
-        CREATE INDEX IF NOT EXISTS idx_raw_data_gin ON weather_raw USING GIN (raw_data);
+
+        CREATE INDEX IF NOT EXISTS idx_raw_city_name    ON weather_raw(city_name);
+        CREATE INDEX IF NOT EXISTS idx_raw_city_id      ON weather_raw(city_id);
+        -- Partial index: only unprocessed active rows (fast for DAG scheduler)
+        CREATE INDEX IF NOT EXISTS idx_raw_processed    ON weather_raw(processed)
+            WHERE processed = FALSE;
+        -- BRIN for time-series range scans on high-volume timestamp column
+        CREATE INDEX IF NOT EXISTS idx_raw_extraction_brin
+            ON weather_raw USING BRIN (extraction_timestamp);
+        -- GIN for JSONB field queries
+        CREATE INDEX IF NOT EXISTS idx_raw_data_gin
+            ON weather_raw USING GIN (raw_data);
         """
-        
+
         try:
             self.cursor.execute(create_table_query)
             self.connection.commit()
             self.logger.info("Table 'weather_raw' created or already exists")
         except Exception as e:
             self.connection.rollback()
-            self.logger.error(f"Error creating table: {e}")
+            self.logger.error(f"Error creating raw table: {e}")
             raise
     
     def insert_raw_record(self, city_name: str, raw_data: Dict, api_response_code: int = 200) -> int:
         """
-        Insert a single raw API response into weather_raw table.
-        
+        Upsert a single raw API response into weather_raw.
+
+        On conflict (same city_name), updates the record so the DAG
+        always has the latest payload for reprocessing. Resets processed=FALSE
+        so the transform task picks it up again. Does NOT touch deleted_at,
+        preserving soft-delete state.
+
         Args:
-            city_name: Name of the city
-            raw_data: Raw JSON response from API
-            api_response_code: HTTP status code from API
-            
+            city_name: City name from API response.
+            raw_data: Full raw JSON payload.
+            api_response_code: HTTP status code from OWM.
+
         Returns:
-            ID of inserted record or None if skipped
+            ID of the inserted/updated record, or None on failure.
         """
         insert_query = """
         INSERT INTO weather_raw (
-            city_name, raw_data, api_response_code, extraction_timestamp, ingestion_timestamp, city_id
+            city_name, city_id, raw_data, api_response_code,
+            extraction_timestamp, ingestion_timestamp, processed
         ) VALUES (
-            %s, %s, %s, %s, %s,
-            COALESCE((SELECT id FROM cities WHERE LOWER(city_name) = LOWER(%s) LIMIT 1), NULL)
-        ) ON CONFLICT (city_name) 
-        DO UPDATE SET 
-            raw_data = EXCLUDED.raw_data,
-            api_response_code = EXCLUDED.api_response_code,
-            extraction_timestamp = EXCLUDED.extraction_timestamp,
-            ingestion_timestamp = EXCLUDED.ingestion_timestamp,
-            city_id = COALESCE(EXCLUDED.city_id, (SELECT id FROM cities WHERE LOWER(city_name) = LOWER(%s) LIMIT 1))
+            %s,
+            COALESCE((SELECT id FROM cities WHERE LOWER(city_name) = LOWER(%s) LIMIT 1), NULL),
+            %s, %s, %s, %s, FALSE
+        )
+        ON CONFLICT (city_name, extraction_timestamp) DO NOTHING
         RETURNING id;
         """
-        
+
         try:
             extraction_timestamp = datetime.now()
             self.cursor.execute(insert_query, (
                 city_name,
+                city_name,          # for city_id subquery
                 json.dumps(raw_data),
                 api_response_code,
                 extraction_timestamp,
-                extraction_timestamp,
-                city_name,
-                city_name
+                extraction_timestamp
             ))
             result = self.cursor.fetchone()
             return result[0] if result else None
@@ -152,7 +163,8 @@ class RawDataLoader:
             skipped_count = 0
             
             for data in raw_data_list:
-                city_name = data.get('name', 'Unknown')
+                # Use requested_city_name to avoid localized spelling mismatches (e.g. Pālanpur) breaking DB joins
+                city_name = data.get('requested_city_name') or data.get('name', 'Unknown')
                 raw_id = self.insert_raw_record(city_name, data)
                 
                 if raw_id:
@@ -184,37 +196,43 @@ class RawDataLoader:
     
     def get_unprocessed_raw_records(self) -> List[Dict]:
         """
-        Get raw records that haven't been processed yet.
-        
+        Retrieve raw records that haven't been processed yet.
+
+        Filters:
+            - processed = FALSE  — not yet transformed
+            - deleted_at IS NULL — exclude soft-deleted records
+
         Returns:
-            List of unprocessed raw records
+            List of unprocessed raw record dicts.
         """
         if not self.connect():
             return []
-        
+
         try:
             query = """
-            SELECT id, city_name, raw_data, extraction_timestamp 
-            FROM weather_raw 
-            WHERE processed = FALSE 
-            ORDER BY extraction_timestamp ASC;
+            SELECT id, city_name, raw_data, extraction_timestamp
+            FROM   weather_raw
+            WHERE  processed   = FALSE
+              AND  deleted_at  IS NULL
+            ORDER  BY extraction_timestamp ASC;
             """
-            
+
             self.cursor.execute(query)
             rows = self.cursor.fetchall()
-            
-            results = []
-            for row in rows:
-                results.append({
-                    'id': row[0],
-                    'city_name': row[1],
-                    'raw_data': row[2],
-                    'extraction_timestamp': row[3]
-                })
-            
-            self.logger.info(f"Retrieved {len(results)} unprocessed raw records")
+
+            results = [
+                {
+                    "id":                   row[0],
+                    "city_name":            row[1],
+                    "raw_data":             row[2],
+                    "extraction_timestamp": row[3],
+                }
+                for row in rows
+            ]
+
+            self.logger.info(f"Retrieved {len(results)} unprocessed raw records (active only)")
             return results
-            
+
         except Exception as e:
             self.logger.error(f"Error fetching unprocessed records: {e}")
             return []

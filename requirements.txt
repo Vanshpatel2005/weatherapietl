@@ -1,20 +1,33 @@
-# Core Dependencies
+# ============================================================
+# Weather Data ETL Platform — Python Dependencies
+# ============================================================
+
+# --- HTTP & API ---
 requests==2.31.0
-psycopg2-binary==2.9.9
+
+# --- Database ---
+psycopg2-binary==2.9.9        # PostgreSQL driver (binary wheel, no build needed)
+
+# --- Configuration ---
 python-dotenv==1.0.0
 
-# Apache Airflow (compatible with Python 3.12)
+# --- Apache Airflow (Python 3.12 compatible) ---
 apache-airflow==2.9.3
 apache-airflow-providers-postgres==5.10.0
 
-# Data Processing
+# --- Data Processing ---
 pandas==2.1.4
 numpy==1.26.2
 
-# Additional Utilities
+# --- Utilities ---
 python-dateutil==2.8.2
 
-# Web Framework (FastAPI)
+# --- Web Framework (FastAPI) ---
 fastapi==0.104.1
-uvicorn[standard]==0.24.0
+uvicorn[standard]==0.24.0       # standard extras include websockets + httptools
 pydantic==2.5.0
+httpx==0.25.2                   # async HTTP client (for FastAPI test client)
+
+# --- Testing ---
+pytest==7.4.3
+pytest-asyncio==0.23.2

@@ -6,186 +6,173 @@
     <title>Weather ETL Pipeline Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #f8fafc;
             padding: 20px;
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
 
         .header {
-            background: #2c3e50;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
         .header h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(to right, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
         }
 
-        .header p {
-            font-size: 14px;
-            opacity: 0.8;
-        }
+        .header p { color: #94a3b8; font-size: 15px; letter-spacing: 0.5px; }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
         }
 
         .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .card h2 {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
+            font-size: 15px;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
         }
 
         .stat-row {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #ecf0f1;
-        }
-
-        .stat-row:last-child {
-            border-bottom: none;
-        }
-
-        .stat-label {
-            font-weight: 500;
-            color: #7f8c8d;
-        }
-
-        .stat-value {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-success {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-warning {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-error {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .freshness-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .freshness-green {
-            background: #28a745;
-        }
-
-        .freshness-yellow {
-            background: #ffc107;
-        }
-
-        .freshness-red {
-            background: #dc3545;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 14px;
         }
 
-        .data-table th,
-        .data-table td {
-            padding: 10px;
+        .stat-row:last-child { border-bottom: none; }
+        .stat-label { color: #94a3b8; font-weight: 400; }
+        .stat-value { font-weight: 600; color: #f1f5f9; }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-success { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+        .status-warning { background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.3); }
+        .status-error { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+        .freshness-indicator {
+            display: inline-block;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px currentColor;
+        }
+        .freshness-green { background: #4ade80; color: #4ade80; }
+        .freshness-yellow { background: #fde047; color: #fde047; }
+        .freshness-red { background: #f87171; color: #f87171; }
+
+        .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .data-table th, .data-table td {
+            padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid #ecf0f1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .data-table th { color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+        .data-table tr { transition: background 0.2s ease; }
+        .data-table tr:hover { background: rgba(255, 255, 255, 0.03); }
 
-        .data-table th {
-            background: #f8f9fa;
+        .health-score { font-size: 38px; font-weight: 700; text-align: center; margin: 15px 0; text-shadow: 0 0 20px currentColor;}
+        .health-score.good { color: #4ade80; }
+        .health-score.warning { color: #fde047; }
+        .health-score.critical { color: #f87171; }
+
+        .last-updated { text-align: center; color: #64748b; font-size: 13px; margin-top: 30px; }
+
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 8px;
             font-weight: 600;
-            color: #2c3e50;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
         }
+        button:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6); }
+        button:active { transform: translateY(0); }
 
-        .data-table tr:hover {
-            background: #f8f9fa;
+        input[type="text"] {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 8px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            transition: border 0.3s ease, background 0.3s ease;
         }
+        input[type="text"]:focus { border-color: #60a5fa; background: rgba(255, 255, 255, 0.1); box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2); }
+        input[type="text"]::placeholder { color: #64748b; }
 
-        .health-score {
-            font-size: 32px;
-            font-weight: bold;
-            text-align: center;
-            margin: 10px 0;
-        }
+        /* Custom Scrollbar for sleekness */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
 
-        .health-score.good {
-            color: #28a745;
-        }
-
-        .health-score.warning {
-            color: #ffc107;
-        }
-
-        .health-score.critical {
-            color: #dc3545;
-        }
-
-        .last-updated {
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 12px;
-            margin-top: 20px;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-        }
+        .loading { text-align: center; padding: 60px; color: #94a3b8; font-size: 18px; letter-spacing: 1px; font-weight: 500;}
+        .spinner { border: 4px solid rgba(255, 255, 255, 0.1); border-left-color: #60a5fa; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .chart-container { position: relative; height: 300px; width: 100%; margin-top: 10px;}
     </style>
 </head>
 <body>
@@ -267,33 +254,56 @@
                         <span class="stat-value" id="health-score">-</span>
                     </div>
                 </div>
+
+                <div class="card">
+                    <h2>Database Stats</h2>
+                    <div class="stat-row">
+                        <span class="stat-label">Total Raw Records</span>
+                        <span class="stat-value" id="raw-total">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Total Clean Records</span>
+                        <span class="stat-value" id="clean-total">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">7-Day Aggregations</span>
+                        <span class="stat-value" id="agg-rows-7d">-</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">7-Day Avg Quality</span>
+                        <span class="stat-value" id="avg-quality-7d">-</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Two-column layout for Manage Cities and Latest Data -->
-            <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+            <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
                 <!-- City Management Section -->
-                <div class="card" style="flex: 1; margin-bottom: 0; height: 400px; overflow-y: auto; min-width: 250px;">
+                <div class="card" style="flex: 1; min-width: 280px; max-height: 400px; overflow-y: auto;">
                     <h2>Manage Cities</h2>
-                    <div style="margin-bottom: 15px;">
-                        <input type="text" id="city-input" placeholder="Enter city name (e.g., Pune)" style="padding: 8px; width: 200px; margin-right: 10px;">
-                        <button onclick="addCity()" style="padding: 8px 15px; background: #2c3e50; color: white; border: none; border-radius: 4px; cursor: pointer;">Add City</button>
+                    <div style="margin-bottom: 20px; display: flex; gap: 10px; position: relative;">
+                        <input type="text" id="city-input" placeholder="Enter city name..." style="flex: 1;" onkeyup="handleCitySearch(event)" autocomplete="off">
+                        <button onclick="addCity()">Add City</button>
+                        
+                        <div id="city-suggestions" style="display: none; position: absolute; top: 100%; left: 0; right: 105px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); border-radius: 8px; margin-top: 5px; z-index: 10; max-height: 200px; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                        </div>
                     </div>
                     <div id="cities-list"></div>
                 </div>
 
                 <!-- Latest Data Section -->
-                <div class="card" style="flex: 2; margin-bottom: 0; height: 400px; overflow-y: auto; overflow-x: hidden;">
+                <div class="card" style="flex: 2; min-width: 300px; max-height: 400px; overflow-y: auto; overflow-x: auto;">
                     <h2>Latest Weather Data</h2>
-                    <table class="data-table" style="width: 100%; border-collapse: collapse;">
+                    <table class="data-table">
                         <thead>
                             <tr>
-                                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">City</th>
-                                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Temperature (°C)</th>
-                                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Humidity (%)</th>
-                                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Pressure (hPa)</th>
-                                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Wind Speed (m/s)</th>
-                                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Recorded At</th>
-                                <th style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;">Ingested At</th>
+                                <th>City</th>
+                                <th>Temperature</th>
+                                <th>Humidity</th>
+                                <th>Pressure</th>
+                                <th>Wind Speed</th>
+                                <th>Recorded At</th>
+                                <th>Ingested At</th>
                             </tr>
                         </thead>
                         <tbody id="latest-data-body">
@@ -302,11 +312,31 @@
                 </div>
             </div>
 
-            <!-- Temperature by City Section -->
-            <div class="card" style="margin-bottom: 20px;">
-                <h2>Current Temperature by City</h2>
-                <div class="chart-container">
-                    <canvas id="tempChart"></canvas>
+            <!-- Two-column layout for Charts and Aggregations -->
+            <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+                <!-- Temperature by City Section -->
+                <div class="card" style="flex: 1; min-width: 300px;">
+                    <h2>Current Temperature by City</h2>
+                    <div class="chart-container">
+                        <canvas id="tempChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Aggregated Metrics Section -->
+                <div class="card" style="flex: 1; min-width: 300px; max-height: 400px; overflow-y: auto;">
+                    <h2>Daily Aggregated Metrics (Last 7 Days)</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>City</th>
+                                <th>Avg Temp</th>
+                                <th>Weather</th>
+                            </tr>
+                        </thead>
+                        <tbody id="aggregated-data-body">
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -316,9 +346,9 @@
         </div>
     </div>
 
-    <div id="dag-loading" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.95); padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: center; z-index: 1000;">
-        <div class="spinner" style="width: 50px; height: 50px; border-width: 4px;"></div>
-        <p style="margin-top: 20px; font-size: 18px; color: #2c3e50;">Pipeline running - fetching weather data...</p>
+    <div id="dag-loading" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); padding: 50px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); text-align: center; z-index: 1000;">
+        <div class="spinner"></div>
+        <p style="font-size: 16px; color: #f8fafc; font-weight: 500; letter-spacing: 0.5px;">Pipeline extracting live data...</p>
     </div>
 
     <script>
@@ -433,8 +463,37 @@
             return null;
         }
 
-        async function loadTrends() {
-            // This function is no longer needed for the simple bar chart
+        async function loadPipelineStats() {
+            const data = await fetchAPI('/pipeline-stats');
+            if (data && data.success && data.data) {
+                const stats = data.data;
+                document.getElementById('raw-total').textContent = stats.raw_total_records || 0;
+                document.getElementById('clean-total').textContent = stats.clean_total_records || 0;
+                document.getElementById('agg-rows-7d').textContent = stats.aggregated_rows_7d || 0;
+                document.getElementById('avg-quality-7d').textContent = stats.avg_quality_score_7d ? stats.avg_quality_score_7d.toFixed(1) + '%' : '-';
+                return stats;
+            }
+            return null;
+        }
+
+        async function loadAggregatedMetrics() {
+            const data = await fetchAPI('/aggregated-metrics?days=7');
+            if (data && data.success && data.data) {
+                const tbody = document.getElementById('aggregated-data-body');
+                tbody.innerHTML = '';
+                
+                data.data.forEach(record => {
+                    const row = document.createElement('tr');
+                    const dateStr = record.aggregation_date.split('T')[0];
+                    row.innerHTML = `
+                        <td>${dateStr}</td>
+                        <td>${record.city_name}</td>
+                        <td>${record.avg_temperature !== null ? record.avg_temperature.toFixed(1) + '°C' : '-'}</td>
+                        <td>${record.dominant_weather_main || '-'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
         }
 
         async function loadLatestData() {
@@ -445,8 +504,9 @@
                 
                 data.data.forEach(record => {
                     const row = document.createElement('tr');
+                    const cityStr = record.state ? `${record.city_name}, ${record.state}` : record.city_name;
                     row.innerHTML = `
-                        <td>${record.city_name}</td>
+                        <td>${cityStr}</td>
                         <td>${record.temperature_celsius.toFixed(1)}°C</td>
                         <td>${record.humidity_percent}%</td>
                         <td>${record.pressure_hpa} hPa</td>
@@ -479,39 +539,39 @@
                     datasets: [{
                         label: 'Temperature (°C)',
                         data: temps,
-                        backgroundColor: 'rgba(52, 152, 219, 0.6)',
-                        borderColor: 'rgba(52, 152, 219, 1)',
-                        borderWidth: 1
+                        backgroundColor: 'rgba(96, 165, 250, 0.7)',
+                        borderColor: 'rgba(96, 165, 250, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: false
-                        },
+                        legend: { display: false },
                         tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#f1f5f9',
+                            bodyColor: '#f1f5f9',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
                             callbacks: {
-                                label: function(context) {
-                                    return `${context.parsed.y.toFixed(1)}°C`;
-                                }
+                                label: function(context) { return `${context.parsed.y.toFixed(1)}°C`; }
                             }
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Temperature (°C)'
-                            }
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#94a3b8' },
+                            title: { display: true, text: 'Temperature (°C)', color: '#94a3b8' }
                         },
                         x: {
-                            title: {
-                                display: true,
-                                text: 'City'
-                            }
+                            grid: { display: false },
+                            ticks: { color: '#94a3b8' },
+                            title: { display: true, text: 'City', color: '#94a3b8' }
                         }
                     }
                 }
@@ -579,7 +639,8 @@
             const pipelineStatus = await loadPipelineStatus();
             const qualityData = await loadDataQuality();
             
-            await loadTrends();
+            await loadPipelineStats();
+            await loadAggregatedMetrics();
             await loadLatestData();
             await loadCities();
             
@@ -602,9 +663,9 @@
                 
                 data.data.forEach(city => {
                     citiesDiv.innerHTML += `
-                        <div style="background: #f8f9fa; padding: 8px 12px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
-                            <span>${city.city_name}</span>
-                            <button onclick="removeCity('${city.city_name}')" style="background: #dc3545; color: white; border: none; border-radius: 3px; padding: 4px 12px; cursor: pointer; font-size: 12px;">Remove</button>
+                        <div style="background: rgba(255,255,255,0.03); padding: 12px 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05); transition: background 0.2s ease;">
+                            <span style="font-weight: 500;">${city.city_name}</span>
+                            <button onclick="removeCity('${city.city_name}')" style="background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 12px; font-size: 12px; box-shadow: none;">Remove</button>
                         </div>
                     `;
                 });
@@ -626,8 +687,10 @@
             const data = await fetchAPI('/cities', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ city_name: cityName })
+                body: JSON.stringify({ city_name: cityName, state_name: selectedState })
             });
+            // Reset after sending
+            selectedState = null;
             
             if (data && data.success) {
                 cityInput.value = '';
@@ -654,6 +717,59 @@
                 alert('Failed to remove city');
             }
         }
+
+        let searchTimeout;
+        let selectedState = null;
+        
+        async function handleCitySearch(event) {
+            // If they press Enter, hide suggestions and submit
+            if (event.key === 'Enter') {
+                document.getElementById('city-suggestions').style.display = 'none';
+                addCity();
+                return;
+            }
+            
+            const query = event.target.value.trim();
+            const suggestionsDiv = document.getElementById('city-suggestions');
+            
+            if (query.length < 2) {
+                suggestionsDiv.style.display = 'none';
+                return;
+            }
+            
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(async () => {
+                const data = await fetchAPI(`/city-search?q=${encodeURIComponent(query)}`);
+                if (data && data.success && data.data && data.data.length > 0) {
+                    suggestionsDiv.innerHTML = '';
+                    data.data.forEach(city => {
+                        const div = document.createElement('div');
+                        div.style.cssText = "padding: 12px 15px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: #e2e8f0; transition: background 0.2s;";
+                        div.onmouseover = () => div.style.background = "rgba(255,255,255,0.1)";
+                        div.onmouseout = () => div.style.background = "transparent";
+                        div.textContent = city.display_name;
+                        div.onclick = () => {
+                            document.getElementById('city-input').value = city.name;
+                            selectedState = city.state;
+                            suggestionsDiv.style.display = 'none';
+                            addCity();
+                        };
+                        suggestionsDiv.appendChild(div);
+                    });
+                    suggestionsDiv.style.display = 'block';
+                } else {
+                    suggestionsDiv.style.display = 'none';
+                }
+            }, 300); // 300ms debounce
+        }
+        
+        // Close suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target.id !== 'city-input') {
+                const suggestions = document.getElementById('city-suggestions');
+                if (suggestions) suggestions.style.display = 'none';
+            }
+        });
 
         // Load dashboard on page load
         document.addEventListener('DOMContentLoaded', () => {

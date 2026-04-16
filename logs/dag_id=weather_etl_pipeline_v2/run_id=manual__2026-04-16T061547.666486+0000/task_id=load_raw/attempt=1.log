@@ -1,0 +1,32 @@
+[2026-04-16T06:15:52.917+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-16T06:15:52.978+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.load_raw manual__2026-04-16T06:15:47.666486+00:00 [queued]>
+[2026-04-16T06:15:52.989+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.load_raw manual__2026-04-16T06:15:47.666486+00:00 [queued]>
+[2026-04-16T06:15:52.990+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 4
+[2026-04-16T06:15:53.007+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_raw> on 2026-04-16 06:15:47.666486+00:00
+[2026-04-16T06:15:53.016+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=1082) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-16T06:15:53.017+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'load_raw', 'manual__2026-04-16T06:15:47.666486+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmptsiq31_4']
+[2026-04-16T06:15:53.020+0000] {standard_task_runner.py:64} INFO - Started process 1083 to run task
+[2026-04-16T06:15:53.021+0000] {standard_task_runner.py:91} INFO - Job 27: Subtask load_raw
+[2026-04-16T06:15:53.089+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.load_raw manual__2026-04-16T06:15:47.666486+00:00 [running]> on host cf9362e38fb8
+[2026-04-16T06:15:53.193+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='load_raw' AIRFLOW_CTX_EXECUTION_DATE='2026-04-16T06:15:47.666486+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-16T06:15:47.666486+00:00'
+[2026-04-16T06:15:53.196+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-16T06:15:53.210+0000] {weather_etl_dag_v2.py:144} INFO - ============================================================
+[2026-04-16T06:15:53.212+0000] {weather_etl_dag_v2.py:145} INFO - TASK: LOAD_RAW — Persisting raw API responses to weather_raw
+[2026-04-16T06:15:53.214+0000] {weather_etl_dag_v2.py:146} INFO - ============================================================
+[2026-04-16T06:15:53.238+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:15:53 - scripts.load_raw - INFO - Starting raw data load for 6 records
+[2026-04-16T06:15:53.237+0000] {load_raw.py:154} INFO - Starting raw data load for 6 records
+[2026-04-16T06:15:53.248+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:15:53 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+[2026-04-16T06:15:53.247+0000] {load_raw.py:38} INFO - Successfully connected to PostgreSQL database
+[2026-04-16T06:15:53.252+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:15:53 - scripts.load_raw - INFO - Table 'weather_raw' created or already exists
+[2026-04-16T06:15:53.252+0000] {load_raw.py:88} INFO - Table 'weather_raw' created or already exists
+[2026-04-16T06:15:53.263+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:15:53 - scripts.load_raw - INFO - Raw data load complete: 6 inserted, 0 skipped (duplicates)
+[2026-04-16T06:15:53.262+0000] {load_raw.py:182} INFO - Raw data load complete: 6 inserted, 0 skipped (duplicates)
+[2026-04-16T06:15:53.266+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:15:53 - scripts.load_raw - INFO - Database connection closed
+[2026-04-16T06:15:53.265+0000] {load_raw.py:53} INFO - Database connection closed
+[2026-04-16T06:15:53.268+0000] {weather_etl_dag_v2.py:158} INFO - ✓ Raw load complete: 6 upserted, 0 skipped (duplicates)
+[2026-04-16T06:15:53.270+0000] {python.py:237} INFO - Done. Returned value was: 6
+[2026-04-16T06:15:53.271+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-16T06:15:53.303+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=load_raw, run_id=manual__2026-04-16T06:15:47.666486+00:00, execution_date=20260416T061547, start_date=20260416T061552, end_date=20260416T061553
+[2026-04-16T06:15:53.358+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-16T06:15:53.404+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-16T06:15:53.409+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

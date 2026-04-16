@@ -1,0 +1,40 @@
+[2026-04-16T06:58:19.356+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-16T06:58:19.402+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-16T06:58:09+00:00 [queued]>
+[2026-04-16T06:58:19.417+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-16T06:58:09+00:00 [queued]>
+[2026-04-16T06:58:19.418+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-04-16T06:58:19.440+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transform_clean> on 2026-04-16 06:58:09+00:00
+[2026-04-16T06:58:19.451+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=2560) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-16T06:58:19.450+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'transform_clean', 'manual__2026-04-16T06:58:09+00:00', '--job-id', '77', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmpir6dh4iz']
+[2026-04-16T06:58:19.453+0000] {standard_task_runner.py:64} INFO - Started process 2561 to run task
+[2026-04-16T06:58:19.453+0000] {standard_task_runner.py:91} INFO - Job 77: Subtask transform_clean
+[2026-04-16T06:58:19.531+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.transform_clean manual__2026-04-16T06:58:09+00:00 [running]> on host cf9362e38fb8
+[2026-04-16T06:58:19.664+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='transform_clean' AIRFLOW_CTX_EXECUTION_DATE='2026-04-16T06:58:09+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-16T06:58:09+00:00'
+[2026-04-16T06:58:19.667+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-16T06:58:19.688+0000] {weather_etl_dag_v2.py:184} INFO - ============================================================
+[2026-04-16T06:58:19.690+0000] {weather_etl_dag_v2.py:185} INFO - TASK: TRANSFORM_CLEAN — Transform & load validated data
+[2026-04-16T06:58:19.692+0000] {weather_etl_dag_v2.py:186} INFO - ============================================================
+[2026-04-16T06:58:19.712+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+[2026-04-16T06:58:19.711+0000] {load_raw.py:38} INFO - Successfully connected to PostgreSQL database
+[2026-04-16T06:58:19.719+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_raw - INFO - Retrieved 69 unprocessed raw records (active only)
+[2026-04-16T06:58:19.718+0000] {load_raw.py:233} INFO - Retrieved 69 unprocessed raw records (active only)
+[2026-04-16T06:58:19.722+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_raw - INFO - Database connection closed
+[2026-04-16T06:58:19.721+0000] {load_raw.py:53} INFO - Database connection closed
+[2026-04-16T06:58:19.724+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_clean - INFO - Starting transformation and load for 69 raw records
+[2026-04-16T06:58:19.724+0000] {load_clean.py:210} INFO - Starting transformation and load for 69 raw records
+[2026-04-16T06:58:19.736+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_clean - INFO - Successfully connected to PostgreSQL database
+[2026-04-16T06:58:19.735+0000] {load_clean.py:41} INFO - Successfully connected to PostgreSQL database
+[2026-04-16T06:58:19.741+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_clean - INFO - Table 'weather_clean' created or already exists
+[2026-04-16T06:58:19.740+0000] {load_clean.py:109} INFO - Table 'weather_clean' created or already exists
+[2026-04-16T06:58:19.854+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_clean - INFO - Marked 69 raw records as processed
+[2026-04-16T06:58:19.852+0000] {load_clean.py:293} INFO - Marked 69 raw records as processed
+[2026-04-16T06:58:19.870+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_clean - INFO - Clean data load complete: 69 transformed, 69 validated, 69 loaded, 0 failed
+[2026-04-16T06:58:19.866+0000] {load_clean.py:265} INFO - Clean data load complete: 69 transformed, 69 validated, 69 loaded, 0 failed
+[2026-04-16T06:58:19.892+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:58:19 - scripts.load_clean - INFO - Database connection closed
+[2026-04-16T06:58:19.886+0000] {load_clean.py:56} INFO - Database connection closed
+[2026-04-16T06:58:19.936+0000] {weather_etl_dag_v2.py:200} INFO - ✓ Transform complete: 69 loaded, 0 failed (will be checked in quality_check)
+[2026-04-16T06:58:19.943+0000] {python.py:237} INFO - Done. Returned value was: 69
+[2026-04-16T06:58:19.946+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-16T06:58:19.996+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=transform_clean, run_id=manual__2026-04-16T06:58:09+00:00, execution_date=20260416T065809, start_date=20260416T065819, end_date=20260416T065819
+[2026-04-16T06:58:20.032+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-16T06:58:20.081+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-16T06:58:20.086+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -33,7 +33,7 @@ class WeatherTransformer:
             # Extract nested data with null handling
             transformed = {
                 'city_id': raw_data.get('id'),
-                'city_name': raw_data.get('name'),
+                'city_name': raw_data.get('requested_city_name') or raw_data.get('name'),
                 'country_code': raw_data.get('sys', {}).get('country'),
                 'latitude': raw_data.get('coord', {}).get('lat'),
                 'longitude': raw_data.get('coord', {}).get('lon'),

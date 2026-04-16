@@ -56,104 +56,141 @@ class CleanDataLoader:
         self.logger.info("Database connection closed")
     
     def create_clean_table_if_not_exists(self):
-        """Create weather_clean table if it doesn't exist."""
+        """Create weather_clean table with all indexes (idempotent)."""
         create_table_query = """
         CREATE TABLE IF NOT EXISTS weather_clean (
-            city_name VARCHAR(100) NOT NULL,
-            recorded_at TIMESTAMP NOT NULL,
-            country_code VARCHAR(10),
-            latitude DECIMAL(10, 6),
-            longitude DECIMAL(10, 6),
-            temperature_celsius DECIMAL(5, 2) NOT NULL,
-            feels_like_celsius DECIMAL(5, 2),
-            humidity_percent INTEGER CHECK (humidity_percent >= 0 AND humidity_percent <= 100),
-            pressure_hpa INTEGER CHECK (pressure_hpa >= 800 AND pressure_hpa <= 1100),
-            wind_speed_mps DECIMAL(5, 2) CHECK (wind_speed_mps >= 0),
-            wind_direction_degrees INTEGER CHECK (wind_direction_degrees >= 0 AND wind_direction_degrees <= 360),
-            weather_main VARCHAR(50),
-            weather_description VARCHAR(200),
-            visibility_meters INTEGER,
-            cloudiness_percent INTEGER CHECK (cloudiness_percent >= 0 AND cloudiness_percent <= 100),
-            ingestion_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            raw_id INTEGER REFERENCES weather_raw(id) ON DELETE SET NULL,
-            city_id INTEGER REFERENCES cities(id),
+            city_name               VARCHAR(100) NOT NULL,
+            recorded_at             TIMESTAMP NOT NULL,
+            country_code            VARCHAR(10),
+            latitude                DECIMAL(10, 6),
+            longitude               DECIMAL(10, 6),
+            temperature_celsius     DECIMAL(5, 2) NOT NULL,
+            feels_like_celsius      DECIMAL(5, 2),
+            humidity_percent        INTEGER CHECK (humidity_percent >= 0 AND humidity_percent <= 100),
+            pressure_hpa            INTEGER CHECK (pressure_hpa >= 800 AND pressure_hpa <= 1100),
+            wind_speed_mps          DECIMAL(5, 2) CHECK (wind_speed_mps >= 0),
+            wind_direction_degrees  INTEGER CHECK (wind_direction_degrees >= 0 AND wind_direction_degrees <= 360),
+            weather_main            VARCHAR(50),
+            weather_description     VARCHAR(200),
+            visibility_meters       INTEGER,
+            cloudiness_percent      INTEGER CHECK (cloudiness_percent >= 0 AND cloudiness_percent <= 100),
+            ingestion_timestamp     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            raw_id                  INTEGER REFERENCES weather_raw(id) ON DELETE SET NULL,
+            city_id                 INTEGER REFERENCES cities(id) ON DELETE SET NULL,
+            -- Soft delete: NULL = active, timestamp = logically deleted
+            deleted_at              TIMESTAMP DEFAULT NULL,
             PRIMARY KEY (city_name, recorded_at)
         );
-        
-        CREATE INDEX IF NOT EXISTS idx_clean_city_name ON weather_clean(city_name);
-        CREATE INDEX IF NOT EXISTS idx_clean_recorded_at ON weather_clean(recorded_at);
-        CREATE INDEX IF NOT EXISTS idx_clean_ingestion_timestamp ON weather_clean(ingestion_timestamp);
-        CREATE INDEX IF NOT EXISTS idx_clean_city_id ON weather_clean(city_id);
-        CREATE INDEX IF NOT EXISTS idx_clean_raw_id ON weather_clean(raw_id);
+
+        -- B-tree indexes for FK joins and equality lookups
+        CREATE INDEX IF NOT EXISTS idx_clean_city_name   ON weather_clean(city_name);
+        CREATE INDEX IF NOT EXISTS idx_clean_city_id     ON weather_clean(city_id);
+        CREATE INDEX IF NOT EXISTS idx_clean_raw_id      ON weather_clean(raw_id);
+
+        -- BRIN indexes for time-series range scans
+        CREATE INDEX IF NOT EXISTS idx_clean_recorded_at_brin
+            ON weather_clean USING BRIN (recorded_at);
+        CREATE INDEX IF NOT EXISTS idx_clean_ingestion_brin
+            ON weather_clean USING BRIN (ingestion_timestamp);
+
+        -- Composite index for dashboard city+time filter queries
+        CREATE INDEX IF NOT EXISTS idx_clean_city_recorded
+            ON weather_clean(city_name, recorded_at DESC);
+
+        -- Partial index for active records only
+        CREATE INDEX IF NOT EXISTS idx_clean_active
+            ON weather_clean(city_name, recorded_at DESC)
+            WHERE deleted_at IS NULL;
         """
-        
+
         try:
             self.cursor.execute(create_table_query)
             self.connection.commit()
             self.logger.info("Table 'weather_clean' created or already exists")
         except Exception as e:
             self.connection.rollback()
-            self.logger.error(f"Error creating table: {e}")
+            self.logger.error(f"Error creating clean table: {e}")
             raise
     
     def insert_clean_record(self, record: Dict[str, Any], raw_id: int) -> bool:
         """
-        Insert or update a clean weather record in weather_clean table.
-        Deletes existing records for the city first, then inserts new record.
-        
+        Insert a clean weather record into weather_clean.
+
+        Uses INSERT ... ON CONFLICT DO UPDATE so::
+            - Existing rows for the same (city_name, recorded_at) are refreshed
+              (e.g. corrected values after a reprocessing run).
+            - Historical rows from earlier timestamps are NEVER deleted — they
+              remain available for trend queries and audit.
+
+        Soft deletes (deleted_at) are reset to NULL on upsert so a previously
+        soft-deleted record becomes active again if re-ingested.
+
         Args:
-            record: Transformed and validated weather record
-            raw_id: ID of the corresponding raw record
-            
+            record: Transformed and validated weather record dict.
+            raw_id: ID of the corresponding weather_raw row.
+
         Returns:
-            True if insert/update successful, False otherwise
+            True on success, False otherwise.
         """
-        city_name = record.get('city_name')
-        
+        city_name = record.get("city_name")
+
+        insert_query = """
+        INSERT INTO weather_clean (
+            city_name, recorded_at, country_code, latitude, longitude,
+            temperature_celsius, feels_like_celsius, humidity_percent,
+            pressure_hpa, wind_speed_mps, wind_direction_degrees,
+            weather_main, weather_description, visibility_meters,
+            cloudiness_percent, ingestion_timestamp, raw_id, city_id,
+            deleted_at
+        ) VALUES (
+            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+            COALESCE((SELECT id FROM cities WHERE LOWER(city_name) = LOWER(%s) LIMIT 1), NULL),
+            NULL
+        )
+        ON CONFLICT (city_name, recorded_at)
+        DO UPDATE SET
+            temperature_celsius    = EXCLUDED.temperature_celsius,
+            feels_like_celsius     = EXCLUDED.feels_like_celsius,
+            humidity_percent       = EXCLUDED.humidity_percent,
+            pressure_hpa           = EXCLUDED.pressure_hpa,
+            wind_speed_mps         = EXCLUDED.wind_speed_mps,
+            wind_direction_degrees = EXCLUDED.wind_direction_degrees,
+            weather_main           = EXCLUDED.weather_main,
+            weather_description    = EXCLUDED.weather_description,
+            visibility_meters      = EXCLUDED.visibility_meters,
+            cloudiness_percent     = EXCLUDED.cloudiness_percent,
+            ingestion_timestamp    = EXCLUDED.ingestion_timestamp,
+            raw_id                 = EXCLUDED.raw_id,
+            city_id                = EXCLUDED.city_id,
+            -- Re-activate if it was previously soft-deleted
+            deleted_at             = NULL;
+        """
+
         try:
-            # Delete all existing records for this city
-            delete_query = "DELETE FROM weather_clean WHERE city_name = %s;"
-            self.cursor.execute(delete_query, (city_name,))
-            
-            # Insert new record
-            insert_query = """
-            INSERT INTO weather_clean (
-                city_name, recorded_at, country_code, latitude, longitude,
-                temperature_celsius, feels_like_celsius, humidity_percent,
-                pressure_hpa, wind_speed_mps, wind_direction_degrees,
-                weather_main, weather_description, visibility_meters,
-                cloudiness_percent, ingestion_timestamp, raw_id, city_id
-            ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
-                COALESCE((SELECT id FROM cities WHERE LOWER(city_name) = LOWER(%s) LIMIT 1), NULL)
-            );
-            """
-            
             self.cursor.execute(insert_query, (
                 city_name,
-                record.get('weather_timestamp'),
-                record.get('country_code'),
-                record.get('latitude'),
-                record.get('longitude'),
-                record.get('temperature_celsius'),
-                record.get('feels_like_celsius'),
-                record.get('humidity_percent'),
-                record.get('pressure_hpa'),
-                record.get('wind_speed_mps'),
-                record.get('wind_direction_degrees'),
-                record.get('weather_main'),
-                record.get('weather_description'),
-                record.get('visibility_meters'),
-                record.get('cloudiness_percent'),
+                record.get("weather_timestamp"),
+                record.get("country_code"),
+                record.get("latitude"),
+                record.get("longitude"),
+                record.get("temperature_celsius"),
+                record.get("feels_like_celsius"),
+                record.get("humidity_percent"),
+                record.get("pressure_hpa"),
+                record.get("wind_speed_mps"),
+                record.get("wind_direction_degrees"),
+                record.get("weather_main"),
+                record.get("weather_description"),
+                record.get("visibility_meters"),
+                record.get("cloudiness_percent"),
                 datetime.now(),
                 raw_id,
-                city_name
+                city_name,  # for city_id subquery
             ))
-            
-            self.logger.info(f"Inserted new record for {city_name} (deleted old records first)")
+            self.logger.debug(f"Upserted clean record for {city_name}")
             return True
         except Exception as e:
-            self.logger.error(f"Error inserting clean record for {record.get('city_name')}: {e}")
+            self.logger.error(f"Error inserting clean record for {city_name}: {e}")
             return False
     
     def transform_and_load(self, raw_records: List[Dict]) -> Dict[str, int]:

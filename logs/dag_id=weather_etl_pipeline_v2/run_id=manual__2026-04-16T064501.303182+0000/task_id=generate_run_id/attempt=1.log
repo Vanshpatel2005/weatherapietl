@@ -1,0 +1,27 @@
+[2026-04-16T06:45:02.785+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-16T06:45:02.836+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.generate_run_id manual__2026-04-16T06:45:01.303182+00:00 [queued]>
+[2026-04-16T06:45:02.850+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.generate_run_id manual__2026-04-16T06:45:01.303182+00:00 [queued]>
+[2026-04-16T06:45:02.852+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 4
+[2026-04-16T06:45:02.866+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): generate_run_id> on 2026-04-16 06:45:01.303182+00:00
+[2026-04-16T06:45:02.874+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=2098) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-16T06:45:02.874+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'generate_run_id', 'manual__2026-04-16T06:45:01.303182+00:00', '--job-id', '60', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmpslp_91xi']
+[2026-04-16T06:45:02.876+0000] {standard_task_runner.py:64} INFO - Started process 2099 to run task
+[2026-04-16T06:45:02.876+0000] {standard_task_runner.py:91} INFO - Job 60: Subtask generate_run_id
+[2026-04-16T06:45:02.935+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.generate_run_id manual__2026-04-16T06:45:01.303182+00:00 [running]> on host cf9362e38fb8
+[2026-04-16T06:45:03.049+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='generate_run_id' AIRFLOW_CTX_EXECUTION_DATE='2026-04-16T06:45:01.303182+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-16T06:45:01.303182+00:00'
+[2026-04-16T06:45:03.051+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-16T06:45:03.071+0000] {weather_etl_dag_v2.py:80} INFO - Generated run_id: scheduled_2026-04-16_064503
+[2026-04-16T06:45:03.122+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:45:03 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+[2026-04-16T06:45:03.120+0000] {metadata_manager.py:38} INFO - Successfully connected to PostgreSQL database
+[2026-04-16T06:45:03.133+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:45:03 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+[2026-04-16T06:45:03.132+0000] {metadata_manager.py:92} INFO - Table 'pipeline_metadata' created or already exists
+[2026-04-16T06:45:03.137+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:45:03 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as RUNNING with run_id: scheduled_2026-04-16_064503
+[2026-04-16T06:45:03.137+0000] {metadata_manager.py:170} INFO - Pipeline weather_etl_pipeline_v2 marked as RUNNING with run_id: scheduled_2026-04-16_064503
+[2026-04-16T06:45:03.139+0000] {logging_mixin.py:188} WARNING - 2026-04-16 06:45:03 - scripts.metadata_manager - INFO - Database connection closed
+[2026-04-16T06:45:03.139+0000] {metadata_manager.py:53} INFO - Database connection closed
+[2026-04-16T06:45:03.141+0000] {python.py:237} INFO - Done. Returned value was: scheduled_2026-04-16_064503
+[2026-04-16T06:45:03.142+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-16T06:45:03.167+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=generate_run_id, run_id=manual__2026-04-16T06:45:01.303182+00:00, execution_date=20260416T064501, start_date=20260416T064502, end_date=20260416T064503
+[2026-04-16T06:45:03.212+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-16T06:45:03.251+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-16T06:45:03.254+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

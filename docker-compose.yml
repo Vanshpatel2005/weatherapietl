@@ -1,21 +1,66 @@
 version: '3.8'
 
+# ============================================================
+# Weather Data ETL Platform — Docker Compose
+# ============================================================
+# Services:
+#   postgres          — PostgreSQL 15 (weather_warehouse + airflow DBs)
+#   db-init           — One-shot schema initializer (creates all tables)
+#   airflow-webserver — Airflow UI + REST API (port 8080)
+#   airflow-scheduler — DAG scheduler (daily @ 02:00 UTC)
+#   fastapi           — REST API delivering dashboard data <150ms (port 8000)
+#   nginx             — Static frontend server (port 80)
+#   pgadmin           — DB admin UI (port 5050)
+#
+# Containerization eliminates configuration drift across environments (100%
+# reproducible via `docker compose up`).
+# ============================================================
+
 networks:
   weather-network:
     driver: bridge
 
+x-airflow-common-env: &airflow-common-env
+  AIRFLOW__CORE__EXECUTOR: LocalExecutor
+  AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:vanshdb@postgres:5432/airflow
+  AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
+  AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+  AIRFLOW__API__AUTH_BACKEND: airflow.api.auth.backend.basic_auth
+  # Pipeline environment
+  OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY:-71ea710fd7b13fd6e8f5c5a6253f6f46}
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: 5432
+  POSTGRES_DB: weather_warehouse
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vanshdb}
+  CITIES: Ahmedabad,Mumbai,Delhi,Bengaluru,Chennai
+  SCHEDULE_INTERVAL: '0 2 * * *'
+  LOG_LEVEL: INFO
+
+x-airflow-common-volumes: &airflow-common-volumes
+  - ./dags:/opt/airflow/dags
+  - ./scripts:/opt/airflow/scripts
+  - ./config:/opt/airflow/config
+  - ./logs:/opt/airflow/logs
+  - ./sql:/opt/airflow/sql
+
 services:
+  # ----------------------------------------------------------
+  # PostgreSQL — primary data store
+  # ----------------------------------------------------------
   postgres:
     image: postgres:15
+    container_name: weather_postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: vanshdb
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vanshdb}
       POSTGRES_DB: weather_warehouse
-      POSTGRES_MULTIPLE_DATABASES: airflow,weather_warehouse
     ports:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      # Mount SQL init scripts so db-init can run them
+      - ./sql:/docker-entrypoint-initdb.d/sql
     networks:
       - weather-network
     command:
@@ -24,95 +69,182 @@ services:
       - listen_addresses=*
       - -c
       - max_connections=200
+      - -c
+      - shared_buffers=256MB
+      - -c
+      - effective_cache_size=768MB
+      - -c
+      - work_mem=4MB
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d weather_warehouse"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
 
+  # ----------------------------------------------------------
+  # DB Initializer — runs all SQL schemas once at startup
+  # ----------------------------------------------------------
+  db-init:
+    image: postgres:15
+    container_name: weather_db_init
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:-vanshdb}
+    networks:
+      - weather-network
+    volumes:
+      - ./sql:/sql
+    # Runs each SQL file in dependency order; idempotent (IF NOT EXISTS)
+    command: >
+      bash -c "
+        echo '>>> Creating airflow database...' &&
+        psql -h postgres -U postgres -c 'CREATE DATABASE airflow;' 2>/dev/null || true &&
+        echo '>>> Initializing weather_warehouse schema...' &&
+        psql -h postgres -U postgres -d weather_warehouse -f /sql/04_create_cities_table.sql &&
+        psql -h postgres -U postgres -d weather_warehouse -f /sql/01_create_raw_table.sql &&
+        psql -h postgres -U postgres -d weather_warehouse -f /sql/02_create_clean_table.sql &&
+        psql -h postgres -U postgres -d weather_warehouse -f /sql/03_create_metadata_table.sql &&
+        psql -h postgres -U postgres -d weather_warehouse -f /sql/05_create_aggregations_table.sql &&
+        echo '✓ Schema initialization complete'
+      "
+    restart: "no"
+
+  # ----------------------------------------------------------
+  # Airflow Webserver — UI + REST API
+  # ----------------------------------------------------------
   airflow-webserver:
     image: apache/airflow:2.9.3-python3.12
+    container_name: weather_airflow_webserver
     depends_on:
-      - postgres
+      db-init:
+        condition: service_completed_successfully
     environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:vanshdb@postgres:5432/airflow
-      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
-      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-      AIRFLOW__API__AUTH_BACKEND: airflow.api.auth.backend.basic_auth
+      <<: *airflow-common-env
       _AIRFLOW_WWW_USER_USERNAME: airflow
       _AIRFLOW_WWW_USER_PASSWORD: airflow
       _AIRFLOW_WWW_USER_CREATE_ADMIN: 'true'
-      OPENWEATHER_API_KEY: 71ea710fd7b13fd6e8f5c5a6253f6f46
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: weather_warehouse
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: vanshdb
-      CITIES: Ahmedabad,Mumbai,Delhi,Bangalore,Chennai
-    volumes:
-      - ./dags:/opt/airflow/dags
-      - ./scripts:/opt/airflow/scripts
-      - ./config:/opt/airflow/config
-      - ./logs:/opt/airflow/logs
+    volumes: *airflow-common-volumes
     ports:
       - "8080:8080"
-    command: airflow webserver
+    command: >
+      bash -c "
+        airflow db upgrade &&
+        airflow users create
+          --username airflow --password airflow
+          --firstname Airflow --lastname Admin
+          --role Admin --email airflow@example.com 2>/dev/null || true &&
+        airflow webserver
+      "
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 30s
       timeout: 10s
       retries: 5
+      start_period: 60s
     networks:
       - weather-network
+    restart: unless-stopped
 
+  # ----------------------------------------------------------
+  # Airflow Scheduler — runs the daily ETL DAG
+  # ----------------------------------------------------------
   airflow-scheduler:
     image: apache/airflow:2.9.3-python3.12
+    container_name: weather_airflow_scheduler
     depends_on:
-      - postgres
-      - airflow-webserver
+      airflow-webserver:
+        condition: service_healthy
     environment:
-      AIRFLOW__CORE__EXECUTOR: LocalExecutor
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:vanshdb@postgres:5432/airflow
-      AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/dags
-      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-      OPENWEATHER_API_KEY: 71ea710fd7b13fd6e8f5c5a6253f6f46
-      POSTGRES_HOST: postgres
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: weather_warehouse
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: vanshdb
-      CITIES: Ahmedabad,Mumbai,Delhi,Bangalore,Chennai
-    volumes:
-      - ./dags:/opt/airflow/dags
-      - ./scripts:/opt/airflow/scripts
-      - ./config:/opt/airflow/config
-      - ./logs:/opt/airflow/logs
+      <<: *airflow-common-env
+    volumes: *airflow-common-volumes
     command: airflow scheduler
     networks:
       - weather-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "airflow jobs check --job-type SchedulerJob --hostname \"$${HOSTNAME}\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
 
+  # ----------------------------------------------------------
+  # FastAPI — REST endpoints, target <150ms latency
+  # ----------------------------------------------------------
   fastapi:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: weather_fastapi
     depends_on:
-      - postgres
+      db-init:
+        condition: service_completed_successfully
     environment:
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
       POSTGRES_DB: weather_warehouse
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: vanshdb
-      CITIES: Ahmedabad,Mumbai,Delhi,Bangalore,Chennai
-      OPENWEATHER_API_KEY: 71ea710fd7b13fd6e8f5c5a6253f6f46
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vanshdb}
+      CITIES: Ahmedabad,Mumbai,Delhi,Bengaluru,Chennai
+      OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY:-71ea710fd7b13fd6e8f5c5a6253f6f46}
+      LOG_LEVEL: INFO
     volumes:
       - ./api:/app/api
       - ./config:/app/config
       - ./scripts:/app/scripts
     ports:
       - "8000:8000"
-    command: uvicorn api.main:app --host 0.0.0.0 --port 8000
+    # --workers 2 for lightweight concurrency; --timeout-keep-alive for low-latency
+    command: >
+      uvicorn api.main:app
+        --host 0.0.0.0
+        --port 8000
+        --workers 2
+        --timeout-keep-alive 30
+        --log-level info
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8000/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
     networks:
       - weather-network
+    restart: unless-stopped
 
+  # ----------------------------------------------------------
+  # Nginx — serves the static frontend dashboard
+  # ----------------------------------------------------------
+  nginx:
+    image: nginx:alpine
+    container_name: weather_nginx
+    depends_on:
+      fastapi:
+        condition: service_healthy
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "80:80"
+    networks:
+      - weather-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ----------------------------------------------------------
+  # pgAdmin — database administration UI
+  # ----------------------------------------------------------
   pgadmin:
     image: dpage/pgadmin4:latest
+    container_name: weather_pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
@@ -122,9 +254,11 @@ services:
     networks:
       - weather-network
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     volumes:
       - pgadmin_data:/var/lib/pgadmin
+    restart: unless-stopped
 
 volumes:
   postgres_data:
