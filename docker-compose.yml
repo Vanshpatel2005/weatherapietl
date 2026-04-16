@@ -1,4 +1,3 @@
-version: '3.8'
 
 # ============================================================
 # Weather Data ETL Platform — Docker Compose
