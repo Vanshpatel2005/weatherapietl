@@ -1,12 +1,5 @@
 """
-City-wise Daily Aggregation Module for Weather ETL Pipeline.
-Computes and stores pre-aggregated daily weather metrics for all active cities.
-
-Design rationale:
-    - Pre-aggregation improves dashboard query performance by ~42% vs real-time GROUP BY
-    - Supports 10K+ daily records ingested across monitored cities
-    - Uses UPSERT (ON CONFLICT) for idempotent re-runs (safe for Airflow retries)
-    - Quality score computed inline to avoid redundant DB round trips
+Computes and stores daily weather metrics for cities.
 """
 
 import psycopg2

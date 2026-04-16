@@ -1,18 +1,8 @@
 """
-Production-Ready Airflow DAG for Weather ETL Pipeline v2.
+DAG for Weather ETL Pipeline.
 
-Orchestrates the full end-to-end workflow:
-    generate_run_id → extract → load_raw → transform_clean
-        → quality_check → aggregate → update_metadata_success
-                                  ↘ update_metadata_failure (on any failure)
-
-Key engineering decisions:
-    - Runs on a daily schedule (02:00 UTC) — processes 10K+ records/day across cities
-    - max_active_runs=1 ensures idempotency; no concurrent runs overwrite each other
-    - retries=3 with exponential-style delay guards against transient API / DB failures
-    - All tasks push stats via XCom so update_metadata can record full lineage
-    - Aggregation task pre-computes city-wise daily metrics → 42% faster dashboard queries
-    - Data quality threshold enforced at 90% pass rate before marking SUCCESS
+Extracts data daily from OpenWeatherMap, loads it raw,
+cleans it, and aggregates it for the dashboard.
 """
 
 from datetime import datetime, timedelta

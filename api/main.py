@@ -1,12 +1,6 @@
 """
-FastAPI Service for Weather ETL Pipeline — Production API v2.
-
-Design goals reflected in implementation:
-    - <150ms p99 latency: measured via X-Response-Time header on every response
-    - Serves dashboard endpoints backed by weather_clean and daily_aggregations tables
-    - CORS enabled for the HTML/JS frontend served via nginx
-    - Soft-delete aware: all queries filter WHERE deleted_at IS NULL
-    - Data quality endpoint exposes quality score computed from clean table constraints
+FastAPI Service for Weather ETL Pipeline.
+Serves dashboard endpoints.
 """
 
 import time
@@ -35,13 +29,8 @@ from scripts.logger import setup_logger
 
 app = FastAPI(
     title="Weather ETL API",
-    description=(
-        "Production REST API for the Weather Data ETL Platform.\n\n"
-        "Powers a real-time dashboard backed by PostgreSQL weather_clean and "
-        "daily_aggregations tables. Target latency: <150ms per request.\n\n"
-        "Data ingested by Apache Airflow DAG running daily at 02:00 UTC."
-    ),
-    version="2.0.0",
+    description="API for the Weather Data ETL Platform.",
+    version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
 )
