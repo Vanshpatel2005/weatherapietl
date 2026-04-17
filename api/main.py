@@ -352,6 +352,8 @@ async def get_aggregated_metrics(
         query = """
         SELECT
             da.city_name,
+            c.state,
+            c.country_code,
             da.aggregation_date,
             da.avg_temperature,
             da.min_temperature,
@@ -562,7 +564,8 @@ async def get_data_quality():
                 COUNT(*) FILTER (
                     WHERE wc.deleted_at IS NOT NULL
                 )                                                                AS soft_deleted,
-                MAX(wc.ingestion_timestamp)                                      AS last_ingestion
+                MAX(wc.ingestion_timestamp)                                      AS last_ingestion,
+                COUNT(DISTINCT wc.city_id)                                       AS city_count
             FROM weather_clean wc
             INNER JOIN cities c ON wc.city_id = c.id
             WHERE c.active = TRUE
@@ -581,6 +584,7 @@ async def get_data_quality():
         null_city   = row[5]
         soft_del    = row[6]
         last_ingest = row[7]
+        city_count  = row[8]
 
         total_issues = inv_temp + inv_humid + inv_press + inv_wind + null_city
         quality_score = round(((total - total_issues) / total) * 100, 2) if total > 0 else 0.0
@@ -592,7 +596,8 @@ async def get_data_quality():
             status = "WARNING"
 
         data = {
-            "total_active_records":     total,
+            "total_records":            total,
+            "city_count":               city_count,
             "soft_deleted_records":     soft_del,
             "invalid_temperature_count":inv_temp,
             "invalid_humidity_count":   inv_humid,
@@ -690,7 +695,7 @@ async def list_cities():
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute(
-            "SELECT id, city_name, country_code, active, created_at "
+            "SELECT id, city_name, country_code, state, active, created_at "
             "FROM cities WHERE active = TRUE ORDER BY city_name;"
         )
         rows = cur.fetchall()
@@ -698,8 +703,8 @@ async def list_cities():
         conn.close()
 
         cities = [
-            {"id": r[0], "city_name": r[1], "country_code": r[2],
-             "active": r[3], "created_at": r[4]}
+            {"id": r[0], "city_name": r[1], "country_code": r[2], "state": r[3],
+             "active": r[4], "created_at": r[5]}
             for r in rows
         ]
         logger.info(f"GET /api/cities → {len(cities)} active cities")
