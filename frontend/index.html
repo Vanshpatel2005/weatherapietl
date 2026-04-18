@@ -490,7 +490,7 @@
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th>Date</th>
+                                    <th>Period</th>
                                     <th>City</th>
                                     <th>Avg Temp (Min/Max)</th>
                                     <th>Avg Humidity</th>
@@ -689,12 +689,18 @@
                     let cityStr = record.city_name;
                     if (record.state) cityStr += `, ${record.state}`;
                     if (record.country_code) cityStr += `, ${record.country_code}`;
+                    
+                    const temp = record.temperature_celsius !== null ? record.temperature_celsius.toFixed(1) + '°C' : '-';
+                    const humidity = record.humidity_percent !== null ? record.humidity_percent + '%' : '-';
+                    const pressure = record.pressure_hpa !== null ? record.pressure_hpa + ' hPa' : '-';
+                    const wind = record.wind_speed_mps !== null ? record.wind_speed_mps.toFixed(1) + ' m/s' : '-';
+
                     row.innerHTML = `
                         <td>${cityStr}</td>
-                        <td>${record.temperature_celsius.toFixed(1)}°C</td>
-                        <td>${record.humidity_percent}%</td>
-                        <td>${record.pressure_hpa} hPa</td>
-                        <td>${record.wind_speed_mps.toFixed(1)} m/s</td>
+                        <td>${temp}</td>
+                        <td>${humidity}</td>
+                        <td>${pressure}</td>
+                        <td>${wind}</td>
                         <td>${formatDate(record.recorded_at)}</td>
                         <td>${formatDate(record.ingestion_timestamp)}</td>
                     `;

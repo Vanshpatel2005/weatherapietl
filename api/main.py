@@ -351,28 +351,29 @@ async def get_aggregated_metrics(
 
         query = """
         SELECT
-            da.city_name,
+            c.city_name,
             c.state,
             c.country_code,
-            da.aggregation_date,
-            da.avg_temperature,
-            da.min_temperature,
-            da.max_temperature,
-            da.stddev_temperature,
-            da.avg_humidity,
-            da.min_humidity,
-            da.max_humidity,
-            da.avg_pressure,
-            da.avg_wind_speed,
-            da.max_wind_speed,
-            da.avg_cloudiness,
-            da.avg_visibility_meters,
-            da.total_records,
-            da.valid_records,
-            da.invalid_records,
-            da.dominant_weather_main,
-            da.data_quality_score,
-            da.computed_at
+            -- Aggregate date range for display
+            MIN(da.aggregation_date)::TEXT || ' to ' || MAX(da.aggregation_date)::TEXT as aggregation_date,
+            AVG(da.avg_temperature) as avg_temperature,
+            MIN(da.min_temperature) as min_temperature,
+            MAX(da.max_temperature) as max_temperature,
+            AVG(da.stddev_temperature) as stddev_temperature,
+            AVG(da.avg_humidity) as avg_humidity,
+            MIN(da.min_humidity) as min_humidity,
+            MAX(da.max_humidity) as max_humidity,
+            AVG(da.avg_pressure) as avg_pressure,
+            AVG(da.avg_wind_speed) as avg_wind_speed,
+            MAX(da.max_wind_speed) as max_wind_speed,
+            AVG(da.avg_cloudiness) as avg_cloudiness,
+            AVG(da.avg_visibility_meters) as avg_visibility_meters,
+            SUM(da.total_records) as total_records,
+            SUM(da.valid_records) as valid_records,
+            SUM(da.invalid_records) as invalid_records,
+            MAX(da.dominant_weather_main) as dominant_weather_main,
+            AVG(da.data_quality_score) as data_quality_score,
+            MAX(da.computed_at) as computed_at
         FROM daily_aggregations da
         INNER JOIN cities c ON da.city_id = c.id
         WHERE da.aggregation_date >= CURRENT_DATE - %s * INTERVAL '1 day'
@@ -383,7 +384,7 @@ async def get_aggregated_metrics(
         if city:
             query += " AND LOWER(da.city_name) = LOWER(%s)"
             params.append(city)
-        query += " ORDER BY da.aggregation_date DESC, da.city_name"
+        query += " GROUP BY c.city_name, c.state, c.country_code ORDER BY c.city_name"
 
         cur.execute(query, params)
         rows = cur.fetchall()
@@ -392,7 +393,7 @@ async def get_aggregated_metrics(
         for row in rows:
             d = dict(row)
             # Normalize date/datetime for JSON serialization
-            if d.get("aggregation_date"):
+            if d.get("aggregation_date") and hasattr(d["aggregation_date"], "isoformat"):
                 d["aggregation_date"] = d["aggregation_date"].isoformat()
             if d.get("computed_at"):
                 d["computed_at"] = utc_to_ist(d["computed_at"]).isoformat() if d["computed_at"] else None

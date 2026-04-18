@@ -1,0 +1,75 @@
+[2026-04-18T05:42:38.038+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-18T05:42:38.095+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.extract scheduled__2026-04-17T02:00:00+00:00 [queued]>
+[2026-04-18T05:42:38.119+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.extract scheduled__2026-04-17T02:00:00+00:00 [queued]>
+[2026-04-18T05:42:38.125+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 4
+[2026-04-18T05:42:38.145+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract> on 2026-04-17 02:00:00+00:00
+[2026-04-18T05:42:38.152+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=194) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-18T05:42:38.152+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'extract', 'scheduled__2026-04-17T02:00:00+00:00', '--job-id', '138', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmp87erlm80']
+[2026-04-18T05:42:38.157+0000] {standard_task_runner.py:64} INFO - Started process 195 to run task
+[2026-04-18T05:42:38.157+0000] {standard_task_runner.py:91} INFO - Job 138: Subtask extract
+[2026-04-18T05:42:38.437+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.extract scheduled__2026-04-17T02:00:00+00:00 [running]> on host fe407dbe3293
+[2026-04-18T05:42:38.535+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2026-04-17T02:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-17T02:00:00+00:00'
+[2026-04-18T05:42:38.536+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-18T05:42:38.550+0000] {weather_etl_dag_v2.py:88} INFO - ============================================================
+[2026-04-18T05:42:38.561+0000] {weather_etl_dag_v2.py:89} INFO - TASK: EXTRACT — Fetching weather data from OpenWeatherMap API
+[2026-04-18T05:42:38.562+0000] {weather_etl_dag_v2.py:90} INFO - ============================================================
+[2026-04-18T05:42:38.577+0000] {weather_etl_dag_v2.py:109} INFO - Active cities fetched from DB: ['Ahmedabad', 'Bengaluru', 'Chennai', 'Delhi', 'Indore', 'Kolkata', 'Kyiv', 'Manali', 'Mumbai', 'New York', 'Palanpur']
+[2026-04-18T05:42:38.584+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:38 - scripts.extract - INFO - Starting extraction for cities: Ahmedabad, Bengaluru, Chennai, Delhi, Indore, Kolkata, Kyiv, Manali, Mumbai, New York, Palanpur
+[2026-04-18T05:42:38.584+0000] {extract.py:127} INFO - Starting extraction for cities: Ahmedabad, Bengaluru, Chennai, Delhi, Indore, Kolkata, Kyiv, Manali, Mumbai, New York, Palanpur
+[2026-04-18T05:42:38.587+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:38 - scripts.extract - INFO - Starting extraction for 11 cities
+[2026-04-18T05:42:38.586+0000] {extract.py:96} INFO - Starting extraction for 11 cities
+[2026-04-18T05:42:38.589+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:38 - scripts.extract - INFO - Fetching weather data for Ahmedabad (attempt 1/3)
+[2026-04-18T05:42:38.588+0000] {extract.py:47} INFO - Fetching weather data for Ahmedabad (attempt 1/3)
+[2026-04-18T05:42:38.792+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:38 - scripts.extract - INFO - Successfully fetched data for Ahmedabad
+[2026-04-18T05:42:38.791+0000] {extract.py:53} INFO - Successfully fetched data for Ahmedabad
+[2026-04-18T05:42:38.795+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:38 - scripts.extract - INFO - Fetching weather data for Bengaluru (attempt 1/3)
+[2026-04-18T05:42:38.795+0000] {extract.py:47} INFO - Fetching weather data for Bengaluru (attempt 1/3)
+[2026-04-18T05:42:38.930+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:38 - scripts.extract - INFO - Successfully fetched data for Bengaluru
+[2026-04-18T05:42:38.929+0000] {extract.py:53} INFO - Successfully fetched data for Bengaluru
+[2026-04-18T05:42:38.932+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:38 - scripts.extract - INFO - Fetching weather data for Chennai (attempt 1/3)
+[2026-04-18T05:42:38.931+0000] {extract.py:47} INFO - Fetching weather data for Chennai (attempt 1/3)
+[2026-04-18T05:42:39.085+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Successfully fetched data for Chennai
+[2026-04-18T05:42:39.085+0000] {extract.py:53} INFO - Successfully fetched data for Chennai
+[2026-04-18T05:42:39.088+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Fetching weather data for Delhi (attempt 1/3)
+[2026-04-18T05:42:39.088+0000] {extract.py:47} INFO - Fetching weather data for Delhi (attempt 1/3)
+[2026-04-18T05:42:39.257+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Successfully fetched data for Delhi
+[2026-04-18T05:42:39.254+0000] {extract.py:53} INFO - Successfully fetched data for Delhi
+[2026-04-18T05:42:39.282+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Fetching weather data for Indore (attempt 1/3)
+[2026-04-18T05:42:39.273+0000] {extract.py:47} INFO - Fetching weather data for Indore (attempt 1/3)
+[2026-04-18T05:42:39.455+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Successfully fetched data for Indore
+[2026-04-18T05:42:39.453+0000] {extract.py:53} INFO - Successfully fetched data for Indore
+[2026-04-18T05:42:39.458+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Fetching weather data for Kolkata (attempt 1/3)
+[2026-04-18T05:42:39.458+0000] {extract.py:47} INFO - Fetching weather data for Kolkata (attempt 1/3)
+[2026-04-18T05:42:39.603+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Successfully fetched data for Kolkata
+[2026-04-18T05:42:39.601+0000] {extract.py:53} INFO - Successfully fetched data for Kolkata
+[2026-04-18T05:42:39.609+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Fetching weather data for Kyiv (attempt 1/3)
+[2026-04-18T05:42:39.608+0000] {extract.py:47} INFO - Fetching weather data for Kyiv (attempt 1/3)
+[2026-04-18T05:42:39.754+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Successfully fetched data for Kyiv
+[2026-04-18T05:42:39.754+0000] {extract.py:53} INFO - Successfully fetched data for Kyiv
+[2026-04-18T05:42:39.757+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Fetching weather data for Manali (attempt 1/3)
+[2026-04-18T05:42:39.756+0000] {extract.py:47} INFO - Fetching weather data for Manali (attempt 1/3)
+[2026-04-18T05:42:39.901+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Successfully fetched data for Manali
+[2026-04-18T05:42:39.900+0000] {extract.py:53} INFO - Successfully fetched data for Manali
+[2026-04-18T05:42:39.904+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:39 - scripts.extract - INFO - Fetching weather data for Mumbai (attempt 1/3)
+[2026-04-18T05:42:39.904+0000] {extract.py:47} INFO - Fetching weather data for Mumbai (attempt 1/3)
+[2026-04-18T05:42:40.048+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:40 - scripts.extract - INFO - Successfully fetched data for Mumbai
+[2026-04-18T05:42:40.047+0000] {extract.py:53} INFO - Successfully fetched data for Mumbai
+[2026-04-18T05:42:40.051+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:40 - scripts.extract - INFO - Fetching weather data for New York (attempt 1/3)
+[2026-04-18T05:42:40.050+0000] {extract.py:47} INFO - Fetching weather data for New York (attempt 1/3)
+[2026-04-18T05:42:40.194+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:40 - scripts.extract - INFO - Successfully fetched data for New York
+[2026-04-18T05:42:40.193+0000] {extract.py:53} INFO - Successfully fetched data for New York
+[2026-04-18T05:42:40.197+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:40 - scripts.extract - INFO - Fetching weather data for Palanpur (attempt 1/3)
+[2026-04-18T05:42:40.197+0000] {extract.py:47} INFO - Fetching weather data for Palanpur (attempt 1/3)
+[2026-04-18T05:42:40.355+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:40 - scripts.extract - INFO - Successfully fetched data for Palanpur
+[2026-04-18T05:42:40.354+0000] {extract.py:53} INFO - Successfully fetched data for Palanpur
+[2026-04-18T05:42:40.361+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:40 - scripts.extract - INFO - Extraction complete: 11 successful, 0 failed
+[2026-04-18T05:42:40.359+0000] {extract.py:114} INFO - Extraction complete: 11 successful, 0 failed
+[2026-04-18T05:42:40.369+0000] {logging_mixin.py:188} WARNING - 2026-04-18 05:42:40 - scripts.extract - INFO - Extracted 11 weather records
+[2026-04-18T05:42:40.363+0000] {extract.py:131} INFO - Extracted 11 weather records
+[2026-04-18T05:42:40.411+0000] {weather_etl_dag_v2.py:117} INFO - ✓ Extraction complete: 11 records for 11 cities in 1.85s
+[2026-04-18T05:42:40.413+0000] {python.py:237} INFO - Done. Returned value was: 11
+[2026-04-18T05:42:40.414+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-18T05:42:40.452+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=extract, run_id=scheduled__2026-04-17T02:00:00+00:00, execution_date=20260417T020000, start_date=20260418T054238, end_date=20260418T054240
+[2026-04-18T05:42:40.508+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-18T05:42:40.552+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-18T05:42:40.556+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
