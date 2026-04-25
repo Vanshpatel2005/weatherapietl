@@ -436,9 +436,9 @@
             <!-- Two-column layout for Manage Cities and Latest Data -->
             <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
                 <!-- City Management Section -->
-                <div class="card" style="flex: 1; min-width: 280px; max-height: 400px; overflow-y: auto;">
+                <div class="card" style="flex: 1; min-width: 280px; height: 500px; display: flex; flex-direction: column;">
                     <h2>Manage Cities</h2>
-                    <div style="margin-bottom: 20px; display: flex; gap: 10px; position: relative;">
+                    <div style="margin-bottom: 20px; display: flex; gap: 10px; position: relative; flex-shrink: 0;">
                         <input type="text" id="city-input" placeholder="Enter city name..." style="flex: 1;"
                             onkeyup="handleCitySearch(event)" autocomplete="off">
                         <button onclick="addCity()">Add City</button>
@@ -447,13 +447,13 @@
                             style="display: none; position: absolute; top: 100%; left: 0; right: 105px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(16px); border-radius: 8px; margin-top: 5px; z-index: 10; max-height: 200px; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
                         </div>
                     </div>
-                    <div id="cities-list"></div>
+                    <div id="cities-list" style="flex: 1; overflow-y: auto; padding-right: 5px;"></div>
                 </div>
 
                 <!-- Latest Data Section -->
-                <div class="card" style="flex: 2; min-width: 300px;">
+                <div class="card" style="flex: 2; min-width: 300px; height: 500px; display: flex; flex-direction: column;">
                     <h2>Latest Weather Data</h2>
-                    <div style="max-height: 350px; overflow-y: auto; overflow-x: auto; padding-right: 10px;">
+                    <div style="flex: 1; overflow-y: auto; overflow-x: auto; padding-right: 10px;">
                         <table class="data-table">
                             <thead>
                                 <tr>
@@ -478,8 +478,10 @@
                 <!-- Temperature by City Section -->
                 <div class="card" style="flex: 1; min-width: 300px;">
                     <h2>Current Temperature by City</h2>
-                    <div class="chart-container">
-                        <canvas id="tempChart"></canvas>
+                    <div style="height: 315px; overflow-y: auto; overflow-x: hidden; padding-right: 10px; margin-top: 10px;">
+                        <div id="chart-inner-container" style="position: relative; width: 100%;">
+                            <canvas id="tempChart"></canvas>
+                        </div>
                     </div>
                 </div>
 
@@ -714,11 +716,11 @@
 
         function renderSimpleChart(data) {
             const canvas = document.getElementById('tempChart');
-            const container = canvas.parentElement;
+            const container = document.getElementById('chart-inner-container');
             
             // Dynamic height: 45px per city ensures consistent spacing
             const rowHeight = 45;
-            container.style.height = `${data.length * rowHeight}px`;
+            container.style.height = `${Math.max(data.length, 1) * rowHeight}px`;
 
             const ctx = canvas.getContext('2d');
 

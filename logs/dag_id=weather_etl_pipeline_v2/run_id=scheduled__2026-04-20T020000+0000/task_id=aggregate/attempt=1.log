@@ -1,0 +1,32 @@
+[2026-04-21T05:58:00.918+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-21T05:58:00.997+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.aggregate scheduled__2026-04-20T02:00:00+00:00 [queued]>
+[2026-04-21T05:58:01.016+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline_v2.aggregate scheduled__2026-04-20T02:00:00+00:00 [queued]>
+[2026-04-21T05:58:01.017+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-04-21T05:58:01.037+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): aggregate> on 2026-04-20 02:00:00+00:00
+[2026-04-21T05:58:01.047+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=203) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-21T05:58:01.050+0000] {standard_task_runner.py:64} INFO - Started process 204 to run task
+[2026-04-21T05:58:01.047+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'weather_etl_pipeline_v2', 'aggregate', 'scheduled__2026-04-20T02:00:00+00:00', '--job-id', '179', '--raw', '--subdir', 'DAGS_FOLDER/weather_etl_dag_v2.py', '--cfg-path', '/tmp/tmphdix_erd']
+[2026-04-21T05:58:01.051+0000] {standard_task_runner.py:91} INFO - Job 179: Subtask aggregate
+[2026-04-21T05:58:01.204+0000] {task_command.py:426} INFO - Running <TaskInstance: weather_etl_pipeline_v2.aggregate scheduled__2026-04-20T02:00:00+00:00 [running]> on host 0986b561c3e9
+[2026-04-21T05:58:01.328+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_etl' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline_v2' AIRFLOW_CTX_TASK_ID='aggregate' AIRFLOW_CTX_EXECUTION_DATE='2026-04-20T02:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-20T02:00:00+00:00'
+[2026-04-21T05:58:01.330+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-21T05:58:01.348+0000] {weather_etl_dag_v2.py:289} INFO - ============================================================
+[2026-04-21T05:58:01.350+0000] {weather_etl_dag_v2.py:290} INFO - TASK: AGGREGATE — Computing city-wise daily metrics
+[2026-04-21T05:58:01.351+0000] {weather_etl_dag_v2.py:291} INFO - ============================================================
+[2026-04-21T05:58:01.364+0000] {logging_mixin.py:188} WARNING - 2026-04-21 05:58:01 - scripts.aggregator - INFO - WeatherAggregator: connected to PostgreSQL
+[2026-04-21T05:58:01.364+0000] {aggregator.py:48} INFO - WeatherAggregator: connected to PostgreSQL
+[2026-04-21T05:58:01.366+0000] {logging_mixin.py:188} WARNING - 2026-04-21 05:58:01 - scripts.aggregator - INFO - Starting aggregation for date: 2026-04-20
+[2026-04-21T05:58:01.366+0000] {aggregator.py:77} INFO - Starting aggregation for date: 2026-04-20
+[2026-04-21T05:58:01.391+0000] {logging_mixin.py:188} WARNING - 2026-04-21 05:58:01 - scripts.aggregator - INFO - ✓ Aggregation complete for 2026-04-20: 14 city-day rows upserted
+[2026-04-21T05:58:01.390+0000] {aggregator.py:194} INFO - ✓ Aggregation complete for 2026-04-20: 14 city-day rows upserted
+[2026-04-21T05:58:01.393+0000] {logging_mixin.py:188} WARNING - 2026-04-21 05:58:01 - scripts.aggregator - INFO - Daily aggregation run complete: 1 day(s), 14 city-day rows upserted
+[2026-04-21T05:58:01.392+0000] {aggregator.py:240} INFO - Daily aggregation run complete: 1 day(s), 14 city-day rows upserted
+[2026-04-21T05:58:01.395+0000] {logging_mixin.py:188} WARNING - 2026-04-21 05:58:01 - scripts.aggregator - INFO - WeatherAggregator: DB connection closed
+[2026-04-21T05:58:01.395+0000] {aggregator.py:60} INFO - WeatherAggregator: DB connection closed
+[2026-04-21T05:58:01.416+0000] {weather_etl_dag_v2.py:298} INFO - ✓ Aggregation complete: 14 city-day rows upserted for 1 day(s)
+[2026-04-21T05:58:01.418+0000] {python.py:237} INFO - Done. Returned value was: 14
+[2026-04-21T05:58:01.419+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-21T05:58:01.446+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline_v2, task_id=aggregate, run_id=scheduled__2026-04-20T02:00:00+00:00, execution_date=20260420T020000, start_date=20260421T055800, end_date=20260421T055801
+[2026-04-21T05:58:01.506+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-21T05:58:01.550+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-21T05:58:01.557+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

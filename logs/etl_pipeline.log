@@ -6017,3 +6017,505 @@ LINE 60: ...                AND  DATE(sub.recorded_at) = DATE(wc.recorde...
 2026-04-18 06:14:52 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records failed     : 0
 2026-04-18 06:14:52 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Validation rate    : 100.0%
 2026-04-18 06:14:52 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Agg rows upserted  : 11
+2026-04-20 06:15:04 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Generated run_id: scheduled_2026-04-19_061504
+2026-04-20 06:15:04 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:15:04 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-20 06:15:04 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as RUNNING with run_id: scheduled_2026-04-19_061504
+2026-04-20 06:15:04 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-20 06:15:06 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:06 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: EXTRACT — Fetching weather data from OpenWeatherMap API
+2026-04-20 06:15:06 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:06 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Active cities fetched from DB: ['Ahmedabad', 'Bengaluru', 'Chennai', 'Delhi', 'Indore', 'Kolkata', 'Kota', 'Kyiv', 'Manali', 'Mumbai', 'New York', 'Palanpur']
+2026-04-20 06:15:06 - scripts.extract - INFO - Starting extraction for cities: Ahmedabad, Bengaluru, Chennai, Delhi, Indore, Kolkata, Kota, Kyiv, Manali, Mumbai, New York, Palanpur
+2026-04-20 06:15:06 - scripts.extract - INFO - Starting extraction for 12 cities
+2026-04-20 06:15:06 - scripts.extract - INFO - Fetching weather data for Ahmedabad (attempt 1/3)
+2026-04-20 06:15:07 - scripts.extract - INFO - Successfully fetched data for Ahmedabad
+2026-04-20 06:15:07 - scripts.extract - INFO - Fetching weather data for Bengaluru (attempt 1/3)
+2026-04-20 06:15:07 - scripts.extract - INFO - Successfully fetched data for Bengaluru
+2026-04-20 06:15:07 - scripts.extract - INFO - Fetching weather data for Chennai (attempt 1/3)
+2026-04-20 06:15:07 - scripts.extract - INFO - Successfully fetched data for Chennai
+2026-04-20 06:15:07 - scripts.extract - INFO - Fetching weather data for Delhi (attempt 1/3)
+2026-04-20 06:15:07 - scripts.extract - INFO - Successfully fetched data for Delhi
+2026-04-20 06:15:07 - scripts.extract - INFO - Fetching weather data for Indore (attempt 1/3)
+2026-04-20 06:15:07 - scripts.extract - INFO - Successfully fetched data for Indore
+2026-04-20 06:15:07 - scripts.extract - INFO - Fetching weather data for Kolkata (attempt 1/3)
+2026-04-20 06:15:07 - scripts.extract - INFO - Successfully fetched data for Kolkata
+2026-04-20 06:15:07 - scripts.extract - INFO - Fetching weather data for Kota (attempt 1/3)
+2026-04-20 06:15:08 - scripts.extract - INFO - Successfully fetched data for Kota
+2026-04-20 06:15:08 - scripts.extract - INFO - Fetching weather data for Kyiv (attempt 1/3)
+2026-04-20 06:15:08 - scripts.extract - INFO - Successfully fetched data for Kyiv
+2026-04-20 06:15:08 - scripts.extract - INFO - Fetching weather data for Manali (attempt 1/3)
+2026-04-20 06:15:08 - scripts.extract - INFO - Successfully fetched data for Manali
+2026-04-20 06:15:08 - scripts.extract - INFO - Fetching weather data for Mumbai (attempt 1/3)
+2026-04-20 06:15:08 - scripts.extract - INFO - Successfully fetched data for Mumbai
+2026-04-20 06:15:08 - scripts.extract - INFO - Fetching weather data for New York (attempt 1/3)
+2026-04-20 06:15:08 - scripts.extract - INFO - Successfully fetched data for New York
+2026-04-20 06:15:08 - scripts.extract - INFO - Fetching weather data for Palanpur (attempt 1/3)
+2026-04-20 06:15:08 - scripts.extract - INFO - Successfully fetched data for Palanpur
+2026-04-20 06:15:08 - scripts.extract - INFO - Extraction complete: 12 successful, 0 failed
+2026-04-20 06:15:08 - scripts.extract - INFO - Extracted 12 weather records
+2026-04-20 06:15:08 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Extraction complete: 12 records for 12 cities in 2.21s
+2026-04-20 06:15:10 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:10 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: LOAD_RAW — Persisting raw API responses to weather_raw
+2026-04-20 06:15:10 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:10 - scripts.load_raw - INFO - Starting raw data load for 12 records
+2026-04-20 06:15:10 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:15:10 - scripts.load_raw - INFO - Table 'weather_raw' created or already exists
+2026-04-20 06:15:10 - scripts.load_raw - INFO - Raw data load complete: 12 inserted, 0 skipped (duplicates)
+2026-04-20 06:15:10 - scripts.load_raw - INFO - Database connection closed
+2026-04-20 06:15:10 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Raw load complete: 12 upserted, 0 skipped (duplicates)
+2026-04-20 06:15:12 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:12 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: TRANSFORM_CLEAN — Transform & load validated data
+2026-04-20 06:15:12 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:12 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:15:12 - scripts.load_raw - INFO - Retrieved 171 unprocessed raw records (active only)
+2026-04-20 06:15:12 - scripts.load_raw - INFO - Database connection closed
+2026-04-20 06:15:12 - scripts.load_clean - INFO - Starting transformation and load for 171 raw records
+2026-04-20 06:15:12 - scripts.load_clean - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:15:12 - scripts.load_clean - INFO - Table 'weather_clean' created or already exists
+2026-04-20 06:15:12 - scripts.load_clean - INFO - Marked 171 raw records as processed
+2026-04-20 06:15:12 - scripts.load_clean - INFO - Clean data load complete: 171 transformed, 171 validated, 171 loaded, 0 failed
+2026-04-20 06:15:12 - scripts.load_clean - INFO - Database connection closed
+2026-04-20 06:15:12 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Transform complete: 171 loaded, 0 failed (will be checked in quality_check)
+2026-04-20 06:15:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: QUALITY_CHECK — Validating clean data quality
+2026-04-20 06:15:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:15 - scripts.validate - INFO - Starting data quality validation for 113 records
+2026-04-20 06:15:15 - scripts.validate - INFO - Validation complete: 113 valid, 0 invalid (100.0% pass rate)
+2026-04-20 06:15:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Quality check: 100.0% pass rate (113/113)
+2026-04-20 06:15:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: AGGREGATE — Computing city-wise daily metrics
+2026-04-20 06:15:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:17 - scripts.aggregator - INFO - WeatherAggregator: connected to PostgreSQL
+2026-04-20 06:15:17 - scripts.aggregator - INFO - Starting aggregation for date: 2026-04-19
+2026-04-20 06:15:17 - scripts.aggregator - INFO - ✓ Aggregation complete for 2026-04-19: 0 city-day rows upserted
+2026-04-20 06:15:17 - scripts.aggregator - INFO - Daily aggregation run complete: 1 day(s), 0 city-day rows upserted
+2026-04-20 06:15:17 - scripts.aggregator - INFO - WeatherAggregator: DB connection closed
+2026-04-20 06:15:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Aggregation complete: 0 city-day rows upserted for 1 day(s)
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: UPDATE_METADATA_SUCCESS — Recording successful pipeline run
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:15:19 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:15:19 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-20 06:15:19 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as SUCCESS: 12 processed, 171 inserted, 0 failed
+2026-04-20 06:15:19 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Pipeline marked as SUCCESS
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records extracted  : 12
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records inserted   : 171
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records failed     : 0
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Validation rate    : 100.0%
+2026-04-20 06:15:19 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Agg rows upserted  : 0
+2026-04-20 06:51:49 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Generated run_id: scheduled_2026-04-20_065149
+2026-04-20 06:51:49 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:51:49 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-20 06:51:49 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as RUNNING with run_id: scheduled_2026-04-20_065149
+2026-04-20 06:51:49 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-20 06:51:51 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:51:51 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: EXTRACT — Fetching weather data from OpenWeatherMap API
+2026-04-20 06:51:51 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:51:51 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Active cities fetched from DB: ['Ahmedabad', 'Bengaluru', 'Chennai', 'Delhi', 'Indore', 'Kolkata', 'Kota', 'Kyiv', 'Los Angeles', 'Manali', 'Mumbai', 'New York', 'Palanpur']
+2026-04-20 06:51:51 - scripts.extract - INFO - Starting extraction for cities: Ahmedabad, Bengaluru, Chennai, Delhi, Indore, Kolkata, Kota, Kyiv, Los Angeles, Manali, Mumbai, New York, Palanpur
+2026-04-20 06:51:51 - scripts.extract - INFO - Starting extraction for 13 cities
+2026-04-20 06:51:51 - scripts.extract - INFO - Fetching weather data for Ahmedabad (attempt 1/3)
+2026-04-20 06:51:51 - scripts.extract - INFO - Successfully fetched data for Ahmedabad
+2026-04-20 06:51:51 - scripts.extract - INFO - Fetching weather data for Bengaluru (attempt 1/3)
+2026-04-20 06:51:51 - scripts.extract - INFO - Successfully fetched data for Bengaluru
+2026-04-20 06:51:51 - scripts.extract - INFO - Fetching weather data for Chennai (attempt 1/3)
+2026-04-20 06:51:51 - scripts.extract - INFO - Successfully fetched data for Chennai
+2026-04-20 06:51:51 - scripts.extract - INFO - Fetching weather data for Delhi (attempt 1/3)
+2026-04-20 06:51:51 - scripts.extract - INFO - Successfully fetched data for Delhi
+2026-04-20 06:51:51 - scripts.extract - INFO - Fetching weather data for Indore (attempt 1/3)
+2026-04-20 06:51:51 - scripts.extract - INFO - Successfully fetched data for Indore
+2026-04-20 06:51:51 - scripts.extract - INFO - Fetching weather data for Kolkata (attempt 1/3)
+2026-04-20 06:51:52 - scripts.extract - INFO - Successfully fetched data for Kolkata
+2026-04-20 06:51:52 - scripts.extract - INFO - Fetching weather data for Kota (attempt 1/3)
+2026-04-20 06:51:52 - scripts.extract - INFO - Successfully fetched data for Kota
+2026-04-20 06:51:52 - scripts.extract - INFO - Fetching weather data for Kyiv (attempt 1/3)
+2026-04-20 06:51:52 - scripts.extract - INFO - Successfully fetched data for Kyiv
+2026-04-20 06:51:52 - scripts.extract - INFO - Fetching weather data for Los Angeles (attempt 1/3)
+2026-04-20 06:51:52 - scripts.extract - INFO - Successfully fetched data for Los Angeles
+2026-04-20 06:51:52 - scripts.extract - INFO - Fetching weather data for Manali (attempt 1/3)
+2026-04-20 06:51:52 - scripts.extract - INFO - Successfully fetched data for Manali
+2026-04-20 06:51:52 - scripts.extract - INFO - Fetching weather data for Mumbai (attempt 1/3)
+2026-04-20 06:51:52 - scripts.extract - INFO - Successfully fetched data for Mumbai
+2026-04-20 06:51:52 - scripts.extract - INFO - Fetching weather data for New York (attempt 1/3)
+2026-04-20 06:51:53 - scripts.extract - INFO - Successfully fetched data for New York
+2026-04-20 06:51:53 - scripts.extract - INFO - Fetching weather data for Palanpur (attempt 1/3)
+2026-04-20 06:51:53 - scripts.extract - INFO - Successfully fetched data for Palanpur
+2026-04-20 06:51:53 - scripts.extract - INFO - Extraction complete: 13 successful, 0 failed
+2026-04-20 06:51:53 - scripts.extract - INFO - Extracted 13 weather records
+2026-04-20 06:51:53 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Extraction complete: 13 records for 13 cities in 2.2s
+2026-04-20 06:51:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:51:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: LOAD_RAW — Persisting raw API responses to weather_raw
+2026-04-20 06:51:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:51:55 - scripts.load_raw - INFO - Starting raw data load for 13 records
+2026-04-20 06:51:55 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:51:55 - scripts.load_raw - INFO - Table 'weather_raw' created or already exists
+2026-04-20 06:51:55 - scripts.load_raw - INFO - Raw data load complete: 13 inserted, 0 skipped (duplicates)
+2026-04-20 06:51:55 - scripts.load_raw - INFO - Database connection closed
+2026-04-20 06:51:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Raw load complete: 13 upserted, 0 skipped (duplicates)
+2026-04-20 06:51:56 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:51:56 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: TRANSFORM_CLEAN — Transform & load validated data
+2026-04-20 06:51:56 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:51:56 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:51:56 - scripts.load_raw - INFO - Retrieved 184 unprocessed raw records (active only)
+2026-04-20 06:51:56 - scripts.load_raw - INFO - Database connection closed
+2026-04-20 06:51:56 - scripts.load_clean - INFO - Starting transformation and load for 184 raw records
+2026-04-20 06:51:56 - scripts.load_clean - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:51:56 - scripts.load_clean - INFO - Table 'weather_clean' created or already exists
+2026-04-20 06:51:56 - scripts.load_clean - INFO - Marked 184 raw records as processed
+2026-04-20 06:51:56 - scripts.load_clean - INFO - Clean data load complete: 184 transformed, 184 validated, 184 loaded, 0 failed
+2026-04-20 06:51:56 - scripts.load_clean - INFO - Database connection closed
+2026-04-20 06:51:56 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Transform complete: 184 loaded, 0 failed (will be checked in quality_check)
+2026-04-20 06:51:57 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:51:57 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: QUALITY_CHECK — Validating clean data quality
+2026-04-20 06:51:57 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:51:57 - scripts.validate - INFO - Starting data quality validation for 126 records
+2026-04-20 06:51:57 - scripts.validate - INFO - Validation complete: 126 valid, 0 invalid (100.0% pass rate)
+2026-04-20 06:51:57 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Quality check: 100.0% pass rate (126/126)
+2026-04-20 06:52:00 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:00 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: AGGREGATE — Computing city-wise daily metrics
+2026-04-20 06:52:00 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:00 - scripts.aggregator - INFO - WeatherAggregator: connected to PostgreSQL
+2026-04-20 06:52:00 - scripts.aggregator - INFO - Starting aggregation for date: 2026-04-19
+2026-04-20 06:52:00 - scripts.aggregator - INFO - ✓ Aggregation complete for 2026-04-19: 0 city-day rows upserted
+2026-04-20 06:52:00 - scripts.aggregator - INFO - Daily aggregation run complete: 1 day(s), 0 city-day rows upserted
+2026-04-20 06:52:00 - scripts.aggregator - INFO - WeatherAggregator: DB connection closed
+2026-04-20 06:52:00 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Aggregation complete: 0 city-day rows upserted for 1 day(s)
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: UPDATE_METADATA_SUCCESS — Recording successful pipeline run
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:01 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:52:01 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-20 06:52:01 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as SUCCESS: 13 processed, 184 inserted, 0 failed
+2026-04-20 06:52:01 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Pipeline marked as SUCCESS
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records extracted  : 13
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records inserted   : 184
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records failed     : 0
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Validation rate    : 100.0%
+2026-04-20 06:52:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Agg rows upserted  : 0
+2026-04-20 06:52:43 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Generated run_id: scheduled_2026-04-20_065243
+2026-04-20 06:52:43 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:52:43 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-20 06:52:43 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as RUNNING with run_id: scheduled_2026-04-20_065243
+2026-04-20 06:52:43 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-20 06:52:43 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:43 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: EXTRACT — Fetching weather data from OpenWeatherMap API
+2026-04-20 06:52:43 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:43 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Active cities fetched from DB: ['Ahmedabad', 'Bengaluru', 'Chennai', 'Delhi', 'Indore', 'Kolkata', 'Kota', 'Kyiv', 'Los Angeles', 'Manali', 'Moscow', 'Mumbai', 'New York', 'Palanpur']
+2026-04-20 06:52:43 - scripts.extract - INFO - Starting extraction for cities: Ahmedabad, Bengaluru, Chennai, Delhi, Indore, Kolkata, Kota, Kyiv, Los Angeles, Manali, Moscow, Mumbai, New York, Palanpur
+2026-04-20 06:52:43 - scripts.extract - INFO - Starting extraction for 14 cities
+2026-04-20 06:52:43 - scripts.extract - INFO - Fetching weather data for Ahmedabad (attempt 1/3)
+2026-04-20 06:52:44 - scripts.extract - INFO - Successfully fetched data for Ahmedabad
+2026-04-20 06:52:44 - scripts.extract - INFO - Fetching weather data for Bengaluru (attempt 1/3)
+2026-04-20 06:52:44 - scripts.extract - INFO - Successfully fetched data for Bengaluru
+2026-04-20 06:52:44 - scripts.extract - INFO - Fetching weather data for Chennai (attempt 1/3)
+2026-04-20 06:52:44 - scripts.extract - INFO - Successfully fetched data for Chennai
+2026-04-20 06:52:44 - scripts.extract - INFO - Fetching weather data for Delhi (attempt 1/3)
+2026-04-20 06:52:44 - scripts.extract - INFO - Successfully fetched data for Delhi
+2026-04-20 06:52:44 - scripts.extract - INFO - Fetching weather data for Indore (attempt 1/3)
+2026-04-20 06:52:44 - scripts.extract - INFO - Successfully fetched data for Indore
+2026-04-20 06:52:44 - scripts.extract - INFO - Fetching weather data for Kolkata (attempt 1/3)
+2026-04-20 06:52:44 - scripts.extract - INFO - Successfully fetched data for Kolkata
+2026-04-20 06:52:44 - scripts.extract - INFO - Fetching weather data for Kota (attempt 1/3)
+2026-04-20 06:52:45 - scripts.extract - INFO - Successfully fetched data for Kota
+2026-04-20 06:52:45 - scripts.extract - INFO - Fetching weather data for Kyiv (attempt 1/3)
+2026-04-20 06:52:45 - scripts.extract - INFO - Successfully fetched data for Kyiv
+2026-04-20 06:52:45 - scripts.extract - INFO - Fetching weather data for Los Angeles (attempt 1/3)
+2026-04-20 06:52:45 - scripts.extract - INFO - Successfully fetched data for Los Angeles
+2026-04-20 06:52:45 - scripts.extract - INFO - Fetching weather data for Manali (attempt 1/3)
+2026-04-20 06:52:45 - scripts.extract - INFO - Successfully fetched data for Manali
+2026-04-20 06:52:45 - scripts.extract - INFO - Fetching weather data for Moscow (attempt 1/3)
+2026-04-20 06:52:45 - scripts.extract - INFO - Successfully fetched data for Moscow
+2026-04-20 06:52:45 - scripts.extract - INFO - Fetching weather data for Mumbai (attempt 1/3)
+2026-04-20 06:52:45 - scripts.extract - INFO - Successfully fetched data for Mumbai
+2026-04-20 06:52:45 - scripts.extract - INFO - Fetching weather data for New York (attempt 1/3)
+2026-04-20 06:52:46 - scripts.extract - INFO - Successfully fetched data for New York
+2026-04-20 06:52:46 - scripts.extract - INFO - Fetching weather data for Palanpur (attempt 1/3)
+2026-04-20 06:52:46 - scripts.extract - INFO - Successfully fetched data for Palanpur
+2026-04-20 06:52:46 - scripts.extract - INFO - Extraction complete: 14 successful, 0 failed
+2026-04-20 06:52:46 - scripts.extract - INFO - Extracted 14 weather records
+2026-04-20 06:52:46 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Extraction complete: 14 records for 14 cities in 2.33s
+2026-04-20 06:52:47 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:47 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: LOAD_RAW — Persisting raw API responses to weather_raw
+2026-04-20 06:52:47 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:48 - scripts.load_raw - INFO - Starting raw data load for 14 records
+2026-04-20 06:52:48 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:52:48 - scripts.load_raw - INFO - Table 'weather_raw' created or already exists
+2026-04-20 06:52:48 - scripts.load_raw - INFO - Raw data load complete: 14 inserted, 0 skipped (duplicates)
+2026-04-20 06:52:48 - scripts.load_raw - INFO - Database connection closed
+2026-04-20 06:52:48 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Raw load complete: 14 upserted, 0 skipped (duplicates)
+2026-04-20 06:52:50 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:50 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: TRANSFORM_CLEAN — Transform & load validated data
+2026-04-20 06:52:50 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:50 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:52:50 - scripts.load_raw - INFO - Retrieved 198 unprocessed raw records (active only)
+2026-04-20 06:52:50 - scripts.load_raw - INFO - Database connection closed
+2026-04-20 06:52:50 - scripts.load_clean - INFO - Starting transformation and load for 198 raw records
+2026-04-20 06:52:50 - scripts.load_clean - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:52:50 - scripts.load_clean - INFO - Table 'weather_clean' created or already exists
+2026-04-20 06:52:50 - scripts.load_clean - INFO - Marked 198 raw records as processed
+2026-04-20 06:52:50 - scripts.load_clean - INFO - Clean data load complete: 198 transformed, 198 validated, 198 loaded, 0 failed
+2026-04-20 06:52:50 - scripts.load_clean - INFO - Database connection closed
+2026-04-20 06:52:50 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Transform complete: 198 loaded, 0 failed (will be checked in quality_check)
+2026-04-20 06:52:52 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:52 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: QUALITY_CHECK — Validating clean data quality
+2026-04-20 06:52:52 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:52 - scripts.validate - INFO - Starting data quality validation for 127 records
+2026-04-20 06:52:52 - scripts.validate - INFO - Validation complete: 127 valid, 0 invalid (100.0% pass rate)
+2026-04-20 06:52:52 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Quality check: 100.0% pass rate (127/127)
+2026-04-20 06:52:54 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:54 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: AGGREGATE — Computing city-wise daily metrics
+2026-04-20 06:52:54 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:54 - scripts.aggregator - INFO - WeatherAggregator: connected to PostgreSQL
+2026-04-20 06:52:54 - scripts.aggregator - INFO - Starting aggregation for date: 2026-04-19
+2026-04-20 06:52:54 - scripts.aggregator - INFO - ✓ Aggregation complete for 2026-04-19: 0 city-day rows upserted
+2026-04-20 06:52:54 - scripts.aggregator - INFO - Daily aggregation run complete: 1 day(s), 0 city-day rows upserted
+2026-04-20 06:52:54 - scripts.aggregator - INFO - WeatherAggregator: DB connection closed
+2026-04-20 06:52:54 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Aggregation complete: 0 city-day rows upserted for 1 day(s)
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: UPDATE_METADATA_SUCCESS — Recording successful pipeline run
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-20 06:52:55 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-20 06:52:55 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-20 06:52:55 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as SUCCESS: 14 processed, 198 inserted, 0 failed
+2026-04-20 06:52:55 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Pipeline marked as SUCCESS
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records extracted  : 14
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records inserted   : 198
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records failed     : 0
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Validation rate    : 100.0%
+2026-04-20 06:52:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Agg rows upserted  : 0
+2026-04-21 05:57:48 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Generated run_id: scheduled_2026-04-20_055748
+2026-04-21 05:57:48 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-21 05:57:48 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-21 05:57:48 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as RUNNING with run_id: scheduled_2026-04-20_055748
+2026-04-21 05:57:48 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-21 05:57:50 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:57:50 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: EXTRACT — Fetching weather data from OpenWeatherMap API
+2026-04-21 05:57:50 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:57:50 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Active cities fetched from DB: ['Ahmedabad', 'Bengaluru', 'Chennai', 'Delhi', 'Indore', 'Kolkata', 'Kota', 'Kyiv', 'Los Angeles', 'Manali', 'Moscow', 'Mumbai', 'New York', 'Palanpur']
+2026-04-21 05:57:50 - scripts.extract - INFO - Starting extraction for cities: Ahmedabad, Bengaluru, Chennai, Delhi, Indore, Kolkata, Kota, Kyiv, Los Angeles, Manali, Moscow, Mumbai, New York, Palanpur
+2026-04-21 05:57:50 - scripts.extract - INFO - Starting extraction for 14 cities
+2026-04-21 05:57:50 - scripts.extract - INFO - Fetching weather data for Ahmedabad (attempt 1/3)
+2026-04-21 05:57:51 - scripts.extract - INFO - Successfully fetched data for Ahmedabad
+2026-04-21 05:57:51 - scripts.extract - INFO - Fetching weather data for Bengaluru (attempt 1/3)
+2026-04-21 05:57:51 - scripts.extract - INFO - Successfully fetched data for Bengaluru
+2026-04-21 05:57:51 - scripts.extract - INFO - Fetching weather data for Chennai (attempt 1/3)
+2026-04-21 05:57:51 - scripts.extract - INFO - Successfully fetched data for Chennai
+2026-04-21 05:57:51 - scripts.extract - INFO - Fetching weather data for Delhi (attempt 1/3)
+2026-04-21 05:57:51 - scripts.extract - INFO - Successfully fetched data for Delhi
+2026-04-21 05:57:51 - scripts.extract - INFO - Fetching weather data for Indore (attempt 1/3)
+2026-04-21 05:57:51 - scripts.extract - INFO - Successfully fetched data for Indore
+2026-04-21 05:57:51 - scripts.extract - INFO - Fetching weather data for Kolkata (attempt 1/3)
+2026-04-21 05:57:52 - scripts.extract - INFO - Successfully fetched data for Kolkata
+2026-04-21 05:57:52 - scripts.extract - INFO - Fetching weather data for Kota (attempt 1/3)
+2026-04-21 05:57:52 - scripts.extract - INFO - Successfully fetched data for Kota
+2026-04-21 05:57:52 - scripts.extract - INFO - Fetching weather data for Kyiv (attempt 1/3)
+2026-04-21 05:57:52 - scripts.extract - INFO - Successfully fetched data for Kyiv
+2026-04-21 05:57:52 - scripts.extract - INFO - Fetching weather data for Los Angeles (attempt 1/3)
+2026-04-21 05:57:52 - scripts.extract - INFO - Successfully fetched data for Los Angeles
+2026-04-21 05:57:52 - scripts.extract - INFO - Fetching weather data for Manali (attempt 1/3)
+2026-04-21 05:57:52 - scripts.extract - INFO - Successfully fetched data for Manali
+2026-04-21 05:57:52 - scripts.extract - INFO - Fetching weather data for Moscow (attempt 1/3)
+2026-04-21 05:57:52 - scripts.extract - INFO - Successfully fetched data for Moscow
+2026-04-21 05:57:52 - scripts.extract - INFO - Fetching weather data for Mumbai (attempt 1/3)
+2026-04-21 05:57:53 - scripts.extract - INFO - Successfully fetched data for Mumbai
+2026-04-21 05:57:53 - scripts.extract - INFO - Fetching weather data for New York (attempt 1/3)
+2026-04-21 05:57:53 - scripts.extract - INFO - Successfully fetched data for New York
+2026-04-21 05:57:53 - scripts.extract - INFO - Fetching weather data for Palanpur (attempt 1/3)
+2026-04-21 05:57:53 - scripts.extract - INFO - Successfully fetched data for Palanpur
+2026-04-21 05:57:53 - scripts.extract - INFO - Extraction complete: 14 successful, 0 failed
+2026-04-21 05:57:53 - scripts.extract - INFO - Extracted 14 weather records
+2026-04-21 05:57:53 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Extraction complete: 14 records for 14 cities in 2.64s
+2026-04-21 05:57:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:57:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: LOAD_RAW — Persisting raw API responses to weather_raw
+2026-04-21 05:57:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:57:55 - scripts.load_raw - INFO - Starting raw data load for 14 records
+2026-04-21 05:57:55 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-21 05:57:55 - scripts.load_raw - INFO - Table 'weather_raw' created or already exists
+2026-04-21 05:57:55 - scripts.load_raw - INFO - Raw data load complete: 14 inserted, 0 skipped (duplicates)
+2026-04-21 05:57:55 - scripts.load_raw - INFO - Database connection closed
+2026-04-21 05:57:55 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Raw load complete: 14 upserted, 0 skipped (duplicates)
+2026-04-21 05:57:57 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:57:57 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: TRANSFORM_CLEAN — Transform & load validated data
+2026-04-21 05:57:57 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:57:57 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-21 05:57:57 - scripts.load_raw - INFO - Retrieved 212 unprocessed raw records (active only)
+2026-04-21 05:57:57 - scripts.load_raw - INFO - Database connection closed
+2026-04-21 05:57:57 - scripts.load_clean - INFO - Starting transformation and load for 212 raw records
+2026-04-21 05:57:57 - scripts.load_clean - INFO - Successfully connected to PostgreSQL database
+2026-04-21 05:57:57 - scripts.load_clean - INFO - Table 'weather_clean' created or already exists
+2026-04-21 05:57:57 - scripts.load_clean - INFO - Marked 212 raw records as processed
+2026-04-21 05:57:57 - scripts.load_clean - INFO - Clean data load complete: 212 transformed, 212 validated, 212 loaded, 0 failed
+2026-04-21 05:57:57 - scripts.load_clean - INFO - Database connection closed
+2026-04-21 05:57:57 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Transform complete: 212 loaded, 0 failed (will be checked in quality_check)
+2026-04-21 05:57:59 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:57:59 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: QUALITY_CHECK — Validating clean data quality
+2026-04-21 05:57:59 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:57:59 - scripts.validate - INFO - Starting data quality validation for 141 records
+2026-04-21 05:57:59 - scripts.validate - INFO - Validation complete: 141 valid, 0 invalid (100.0% pass rate)
+2026-04-21 05:57:59 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Quality check: 100.0% pass rate (141/141)
+2026-04-21 05:58:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:58:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: AGGREGATE — Computing city-wise daily metrics
+2026-04-21 05:58:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:58:01 - scripts.aggregator - INFO - WeatherAggregator: connected to PostgreSQL
+2026-04-21 05:58:01 - scripts.aggregator - INFO - Starting aggregation for date: 2026-04-20
+2026-04-21 05:58:01 - scripts.aggregator - INFO - ✓ Aggregation complete for 2026-04-20: 14 city-day rows upserted
+2026-04-21 05:58:01 - scripts.aggregator - INFO - Daily aggregation run complete: 1 day(s), 14 city-day rows upserted
+2026-04-21 05:58:01 - scripts.aggregator - INFO - WeatherAggregator: DB connection closed
+2026-04-21 05:58:01 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Aggregation complete: 14 city-day rows upserted for 1 day(s)
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: UPDATE_METADATA_SUCCESS — Recording successful pipeline run
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-21 05:58:03 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-21 05:58:03 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-21 05:58:03 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as SUCCESS: 14 processed, 212 inserted, 0 failed
+2026-04-21 05:58:03 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Pipeline marked as SUCCESS
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records extracted  : 14
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records inserted   : 212
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records failed     : 0
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Validation rate    : 100.0%
+2026-04-21 05:58:03 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Agg rows upserted  : 14
+2026-04-22 07:04:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Generated run_id: scheduled_2026-04-21_070415
+2026-04-22 07:04:15 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-22 07:04:15 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-22 07:04:15 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as RUNNING with run_id: scheduled_2026-04-21_070415
+2026-04-22 07:04:15 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-22 07:04:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:04:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: EXTRACT — Fetching weather data from OpenWeatherMap API
+2026-04-22 07:04:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:04:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - Active cities fetched from DB: ['Ahmedabad', 'Bengaluru', 'Chennai', 'Delhi', 'Indore', 'Kolkata', 'Kota', 'Kyiv', 'Los Angeles', 'Manali', 'Moscow', 'Mumbai', 'New York', 'Palanpur']
+2026-04-22 07:04:17 - scripts.extract - INFO - Starting extraction for cities: Ahmedabad, Bengaluru, Chennai, Delhi, Indore, Kolkata, Kota, Kyiv, Los Angeles, Manali, Moscow, Mumbai, New York, Palanpur
+2026-04-22 07:04:17 - scripts.extract - INFO - Starting extraction for 14 cities
+2026-04-22 07:04:17 - scripts.extract - INFO - Fetching weather data for Ahmedabad (attempt 1/3)
+2026-04-22 07:04:17 - scripts.extract - ERROR - Request error for Ahmedabad: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Ahmedabad&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400d93d4f80>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:19 - scripts.extract - INFO - Fetching weather data for Ahmedabad (attempt 2/3)
+2026-04-22 07:04:19 - scripts.extract - ERROR - Request error for Ahmedabad: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Ahmedabad&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4a3cc50>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:21 - scripts.extract - INFO - Fetching weather data for Ahmedabad (attempt 3/3)
+2026-04-22 07:04:21 - scripts.extract - ERROR - Request error for Ahmedabad: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Ahmedabad&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa9040>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:21 - scripts.extract - INFO - Fetching weather data for Bengaluru (attempt 1/3)
+2026-04-22 07:04:21 - scripts.extract - ERROR - Request error for Bengaluru: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Bengaluru&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa9c70>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:23 - scripts.extract - INFO - Fetching weather data for Bengaluru (attempt 2/3)
+2026-04-22 07:04:23 - scripts.extract - ERROR - Request error for Bengaluru: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Bengaluru&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aaa6c0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:25 - scripts.extract - INFO - Fetching weather data for Bengaluru (attempt 3/3)
+2026-04-22 07:04:25 - scripts.extract - ERROR - Request error for Bengaluru: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Bengaluru&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aaade0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:25 - scripts.extract - INFO - Fetching weather data for Chennai (attempt 1/3)
+2026-04-22 07:04:25 - scripts.extract - ERROR - Request error for Chennai: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Chennai&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4b71fd0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:27 - scripts.extract - INFO - Fetching weather data for Chennai (attempt 2/3)
+2026-04-22 07:04:27 - scripts.extract - ERROR - Request error for Chennai: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Chennai&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aaacf0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:29 - scripts.extract - INFO - Fetching weather data for Chennai (attempt 3/3)
+2026-04-22 07:04:29 - scripts.extract - ERROR - Request error for Chennai: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Chennai&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa9cd0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:29 - scripts.extract - INFO - Fetching weather data for Delhi (attempt 1/3)
+2026-04-22 07:04:29 - scripts.extract - ERROR - Request error for Delhi: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Delhi&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa8920>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:31 - scripts.extract - INFO - Fetching weather data for Delhi (attempt 2/3)
+2026-04-22 07:04:31 - scripts.extract - ERROR - Request error for Delhi: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Delhi&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aabe30>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:33 - scripts.extract - INFO - Fetching weather data for Delhi (attempt 3/3)
+2026-04-22 07:04:33 - scripts.extract - ERROR - Request error for Delhi: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Delhi&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad06b0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:33 - scripts.extract - INFO - Fetching weather data for Indore (attempt 1/3)
+2026-04-22 07:04:33 - scripts.extract - ERROR - Request error for Indore: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Indore&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad0f80>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:35 - scripts.extract - INFO - Fetching weather data for Indore (attempt 2/3)
+2026-04-22 07:04:36 - scripts.extract - ERROR - Request error for Indore: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Indore&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa8110>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:38 - scripts.extract - INFO - Fetching weather data for Indore (attempt 3/3)
+2026-04-22 07:04:38 - scripts.extract - ERROR - Request error for Indore: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Indore&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa8770>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:38 - scripts.extract - INFO - Fetching weather data for Kolkata (attempt 1/3)
+2026-04-22 07:04:38 - scripts.extract - ERROR - Request error for Kolkata: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kolkata&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aaa930>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:40 - scripts.extract - INFO - Fetching weather data for Kolkata (attempt 2/3)
+2026-04-22 07:04:40 - scripts.extract - ERROR - Request error for Kolkata: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kolkata&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aab680>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:42 - scripts.extract - INFO - Fetching weather data for Kolkata (attempt 3/3)
+2026-04-22 07:04:42 - scripts.extract - ERROR - Request error for Kolkata: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kolkata&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad1070>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:42 - scripts.extract - INFO - Fetching weather data for Kota (attempt 1/3)
+2026-04-22 07:04:42 - scripts.extract - ERROR - Request error for Kota: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kota&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad1910>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:44 - scripts.extract - INFO - Fetching weather data for Kota (attempt 2/3)
+2026-04-22 07:04:45 - scripts.extract - ERROR - Request error for Kota: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kota&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4a73ef0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:47 - scripts.extract - INFO - Fetching weather data for Kota (attempt 3/3)
+2026-04-22 07:04:47 - scripts.extract - ERROR - Request error for Kota: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kota&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa9070>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:47 - scripts.extract - INFO - Fetching weather data for Kyiv (attempt 1/3)
+2026-04-22 07:04:47 - scripts.extract - ERROR - Request error for Kyiv: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kyiv&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa9d90>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:49 - scripts.extract - INFO - Fetching weather data for Kyiv (attempt 2/3)
+2026-04-22 07:04:49 - scripts.extract - ERROR - Request error for Kyiv: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kyiv&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa9c40>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:51 - scripts.extract - INFO - Fetching weather data for Kyiv (attempt 3/3)
+2026-04-22 07:04:52 - scripts.extract - ERROR - Request error for Kyiv: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Kyiv&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad05c0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:52 - scripts.extract - INFO - Fetching weather data for Los Angeles (attempt 1/3)
+2026-04-22 07:04:52 - scripts.extract - ERROR - Request error for Los Angeles: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Los+Angeles&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad2090>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:54 - scripts.extract - INFO - Fetching weather data for Los Angeles (attempt 2/3)
+2026-04-22 07:04:54 - scripts.extract - ERROR - Request error for Los Angeles: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Los+Angeles&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400fdb3b920>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:56 - scripts.extract - INFO - Fetching weather data for Los Angeles (attempt 3/3)
+2026-04-22 07:04:57 - scripts.extract - ERROR - Request error for Los Angeles: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Los+Angeles&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aabec0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:57 - scripts.extract - INFO - Fetching weather data for Manali (attempt 1/3)
+2026-04-22 07:04:57 - scripts.extract - ERROR - Request error for Manali: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Manali&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aab770>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:04:59 - scripts.extract - INFO - Fetching weather data for Manali (attempt 2/3)
+2026-04-22 07:04:59 - scripts.extract - ERROR - Request error for Manali: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Manali&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aab230>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:05:01 - scripts.extract - INFO - Fetching weather data for Manali (attempt 3/3)
+2026-04-22 07:05:01 - scripts.extract - ERROR - Request error for Manali: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Manali&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad1f10>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:05:01 - scripts.extract - INFO - Fetching weather data for Moscow (attempt 1/3)
+2026-04-22 07:05:01 - scripts.extract - ERROR - Request error for Moscow: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Moscow&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad0410>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:05:03 - scripts.extract - INFO - Fetching weather data for Moscow (attempt 2/3)
+2026-04-22 07:05:03 - scripts.extract - ERROR - Request error for Moscow: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Moscow&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4ad3110>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:05:05 - scripts.extract - INFO - Fetching weather data for Moscow (attempt 3/3)
+2026-04-22 07:05:06 - scripts.extract - ERROR - Request error for Moscow: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Moscow&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aaa330>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:05:06 - scripts.extract - INFO - Fetching weather data for Mumbai (attempt 1/3)
+2026-04-22 07:05:06 - scripts.extract - ERROR - Request error for Mumbai: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Mumbai&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aabc80>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:05:08 - scripts.extract - INFO - Fetching weather data for Mumbai (attempt 2/3)
+2026-04-22 07:05:08 - scripts.extract - ERROR - Request error for Mumbai: HTTPSConnectionPool(host='api.openweathermap.org', port=443): Max retries exceeded with url: /data/2.5/weather?q=Mumbai&appid=71ea710fd7b13fd6e8f5c5a6253f6f46&units=metric (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7400f4aa82f0>: Failed to resolve 'api.openweathermap.org' ([Errno -2] Name or service not known)"))
+2026-04-22 07:05:10 - scripts.extract - INFO - Fetching weather data for Mumbai (attempt 3/3)
+2026-04-22 07:05:11 - scripts.extract - INFO - Successfully fetched data for Mumbai
+2026-04-22 07:05:11 - scripts.extract - INFO - Fetching weather data for New York (attempt 1/3)
+2026-04-22 07:05:11 - scripts.extract - INFO - Successfully fetched data for New York
+2026-04-22 07:05:11 - scripts.extract - INFO - Fetching weather data for Palanpur (attempt 1/3)
+2026-04-22 07:05:12 - scripts.extract - INFO - Successfully fetched data for Palanpur
+2026-04-22 07:05:12 - scripts.extract - INFO - Extraction complete: 3 successful, 11 failed
+2026-04-22 07:05:12 - scripts.extract - INFO - Extracted 3 weather records
+2026-04-22 07:05:12 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Extraction complete: 3 records for 14 cities in 54.48s
+2026-04-22 07:05:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: LOAD_RAW — Persisting raw API responses to weather_raw
+2026-04-22 07:05:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:15 - scripts.load_raw - INFO - Starting raw data load for 3 records
+2026-04-22 07:05:15 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-22 07:05:15 - scripts.load_raw - INFO - Table 'weather_raw' created or already exists
+2026-04-22 07:05:15 - scripts.load_raw - INFO - Raw data load complete: 3 inserted, 0 skipped (duplicates)
+2026-04-22 07:05:15 - scripts.load_raw - INFO - Database connection closed
+2026-04-22 07:05:15 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Raw load complete: 3 upserted, 0 skipped (duplicates)
+2026-04-22 07:05:16 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:16 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: TRANSFORM_CLEAN — Transform & load validated data
+2026-04-22 07:05:16 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:16 - scripts.load_raw - INFO - Successfully connected to PostgreSQL database
+2026-04-22 07:05:16 - scripts.load_raw - INFO - Retrieved 215 unprocessed raw records (active only)
+2026-04-22 07:05:16 - scripts.load_raw - INFO - Database connection closed
+2026-04-22 07:05:16 - scripts.load_clean - INFO - Starting transformation and load for 215 raw records
+2026-04-22 07:05:16 - scripts.load_clean - INFO - Successfully connected to PostgreSQL database
+2026-04-22 07:05:16 - scripts.load_clean - INFO - Table 'weather_clean' created or already exists
+2026-04-22 07:05:17 - scripts.load_clean - INFO - Marked 215 raw records as processed
+2026-04-22 07:05:17 - scripts.load_clean - INFO - Clean data load complete: 215 transformed, 215 validated, 215 loaded, 0 failed
+2026-04-22 07:05:17 - scripts.load_clean - INFO - Database connection closed
+2026-04-22 07:05:17 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Transform complete: 215 loaded, 0 failed (will be checked in quality_check)
+2026-04-22 07:05:18 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:18 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: QUALITY_CHECK — Validating clean data quality
+2026-04-22 07:05:18 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:18 - scripts.validate - INFO - Starting data quality validation for 144 records
+2026-04-22 07:05:18 - scripts.validate - INFO - Validation complete: 144 valid, 0 invalid (100.0% pass rate)
+2026-04-22 07:05:18 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Quality check: 100.0% pass rate (144/144)
+2026-04-22 07:05:21 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:21 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: AGGREGATE — Computing city-wise daily metrics
+2026-04-22 07:05:21 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:21 - scripts.aggregator - INFO - WeatherAggregator: connected to PostgreSQL
+2026-04-22 07:05:21 - scripts.aggregator - INFO - Starting aggregation for date: 2026-04-21
+2026-04-22 07:05:21 - scripts.aggregator - INFO - ✓ Aggregation complete for 2026-04-21: 14 city-day rows upserted
+2026-04-22 07:05:21 - scripts.aggregator - INFO - Daily aggregation run complete: 1 day(s), 14 city-day rows upserted
+2026-04-22 07:05:21 - scripts.aggregator - INFO - WeatherAggregator: DB connection closed
+2026-04-22 07:05:21 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Aggregation complete: 14 city-day rows upserted for 1 day(s)
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - TASK: UPDATE_METADATA_SUCCESS — Recording successful pipeline run
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ============================================================
+2026-04-22 07:05:24 - scripts.metadata_manager - INFO - Successfully connected to PostgreSQL database
+2026-04-22 07:05:24 - scripts.metadata_manager - INFO - Table 'pipeline_metadata' created or already exists
+2026-04-22 07:05:24 - scripts.metadata_manager - INFO - Pipeline weather_etl_pipeline_v2 marked as SUCCESS: 3 processed, 215 inserted, 0 failed
+2026-04-22 07:05:24 - scripts.metadata_manager - INFO - Database connection closed
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO - ✓ Pipeline marked as SUCCESS
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records extracted  : 3
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records inserted   : 215
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Records failed     : 0
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Validation rate    : 100.0%
+2026-04-22 07:05:24 - unusual_prefix_4e2e17f918f933c53e16101532656b9757d771a1_weather_etl_dag_v2 - INFO -   Agg rows upserted  : 14
