@@ -292,7 +292,7 @@ def aggregate_task(**context):
 
     try:
         aggregator = WeatherAggregator()
-        summary = aggregator.run_daily_aggregation(days_back=1)
+        summary = aggregator.run_daily_aggregation(days_back=7)
 
         context["task_instance"].xcom_push(key="aggregation_summary", value=summary)
         logger.info(

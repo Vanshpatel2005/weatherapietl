@@ -305,7 +305,7 @@ class WeatherAggregator:
 def main():
     """Standalone execution entry point for manual testing."""
     aggregator = WeatherAggregator()
-    summary = aggregator.run_daily_aggregation(days_back=1)
+    summary = aggregator.run_daily_aggregation(days_back=7)
     print(f"Aggregation summary: {summary}")
     return summary
 
